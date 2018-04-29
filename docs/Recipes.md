@@ -13,46 +13,137 @@ Istavan Albert
 
 - __Aswathy Sebastian__ - Bioinformatician, wrote pipelines used for metabarcode analysis
 
-- __Natay Aberra__ ( me ) - Programmer, made platform used to run and share pipelines. 
+- __Natay Aberra__ - Programmer, made platform used to run and share pipelines. 
 ![](./images/state.png)
 
 ---
 
 ## Metabarcoding project
 
-Classify a population of fish in the great lakes using different methods and compare their results. 
+Classify population of fish using different analytic pipelines and compare their results.
 
-- Quickly search of invasive species 
+Guiding princlipes when making our pipelines:
+- Written to be easily tuneable and reproducible. 
+	- In principal, a pipeline written to classify fish should be able to classify anything else. 
+
 
 ---
 
-## Bioinformatic Recipes
+## Broader issue 
+
+In many cases, one lab can not recreate the results of another even if both start with the same data set.
+
 
 - __Problem__ : Bioinformatics is experiencing a _reproducibility crisis_. 
 - __Solution__ :  A web application allowing scientists to document, execute and share data analysis scripts. 
-
-We call these analysis scripts ___recipes___. 
+	- We call these analysis scripts ___recipes___. 
   
+---
+## Biostar-Engine: A sharing platform
+
+
+The application : https://www.bioinformatics.recipes/
+
+Designed to facilitate __sharing__ and __reproducibility__.
+
+Additional features:
+- Generates an easy-to-use graphical interface to command line tools
+- Supports public and private project-based workflows
+- Data storage
+
+The software that runs this website is called [Biostar-Engine](https://github.com/biostars/biostar-engine)
+
+
+
+---
+
+## Recipe vs. Engine
+
+The engine/platform is independant from the analysis scripts that run on it.
+
+Recipes are generic and their use is not limited to the this website. A recipe from this site can be executed on any system that has the required bioinformatics tools installed.
+
+
+---
+
+#### Bioinformatic Recipes 
+
+A recipe is a pipeline with an added graphical interface ( GUI ).
+1. The commands may be any list of commands that can be executed in an environment. `echo "Hello World!"`
+  
+2. The GUI spec is a file in JSON (Javascript Object Notation).
+
+      
+        {
+            cutoff: {
+                label: P-Value Cutoff
+                display: FLOAT
+                value: 0.05
+                range: [ 0, 1]
+        }
+   
+ 	![](./images/cutoff-parameter.png)
+
+
+
+
+---
+___Is a recipe a "pipeline"?___
+<sub>Yes. A recipe may be thought of as a web enabled pipeline execution environment.</sub>
+
+___What is the minimal requirment?___
+<sub>An empty GUI spec dictonary `{}` and an empty template make the simplest recipe. </sub>
+
+___Easiest way to get someones recipe?___
+<sub>Just copy it ! Anyone that can see a recipe can copy their own version of it. </sub>
+
+---
+
+## Where to start
+
+1. Create a project
+	- <sub>Projects act as containers for recipes, data, and analytic results.</sub>
+	
+2. Add data into project
+	- <sub>Several methods to add data, some have restirctions on size.</sub>
+
+3. Create a recipe 
+	- <sub>Create a blank recipe or copy one and edit it.</sub>
+
+4. Run the recipe and view results
+	- <sub>Running a recipe creates a set of results that can be downloaded or re-ran in another recipe.</sub>
+
+---
+# General structure 
+
+Evey analysis on the website is cointained within projects.
+
+Each project has three distinct sections:
+
+- Data: Sequencing runs, data files, etc.
+- Recipes: Graphic interface + pipeline
+- Results: Data generated from recipes
+
+The __Results__ are created by applying a __Recipe__ on __Data__.
 
 
 ---
 ## Create a project
 
+---
+
+## Add data
+Uploading large data ( > 25 MB): 
 
 
 ---
-
-## Upload some data
-Uploading large data ( > 25 MB):
-
-- The website allows  
-
+## Create recipe 
 
 ---
-## Copy over recipes 
+## Run and gather results
 
 ---
-## Run your own version 
+
 
 
 
