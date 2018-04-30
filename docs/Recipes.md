@@ -80,12 +80,19 @@ A recipe is a pipeline with an added graphical interface ( GUI ).
                 display: FLOAT
                 value: 0.05
                 range: [ 0, 1]
+                }
         }
    
  	![](./images/cutoff-parameter.png)
 
 
+---
+## How do I use a parameter in the script template?
+![](./images/cutoff-parameter.png)
+If you have a parameter called cutoff as above you can use it in a recipe as `{{ cutoff.value }}`.
+The placeholder `{{ cutoff.value }}` will get substituted with the user selection in your script. If your script is in bash you could write:
 
+	echo "You selected a cutoff of: {{ cutoff.value }}"
 
 ---
 ___Is a recipe a "pipeline"?___
@@ -111,18 +118,17 @@ ___Easiest way to get someones recipe?___
 	- <sub>Create a blank recipe or copy one and edit it.</sub>
 
 4. Run the recipe and view results
-	- <sub>Running a recipe creates a set of results that can be downloaded or re-ran in another recipe.</sub>
+	- <sub>Running a recipe creates a set of files that can be downloaded or re-ran in another recipe.</sub>
 
 ---
-# General structure 
+## General structure 
 
-Evey analysis on the website is cointained within projects.
-
+![](./images/todo/project-view.png)
 Each project has three distinct sections:
 
-- Data: Sequencing runs, sample sheets, etc.
-- Recipes: Graphic interface + pipeline
-- Results: Data generated from recipes
+- __Data__: Sequencing runs, sample sheets, etc.
+- __Recipes__: Graphic interface + pipeline
+- __Results__: files generated from running recipes
 
 The __Results__ are created by applying a __Recipe__ on __Data__.
 
@@ -130,10 +136,23 @@ The __Results__ are created by applying a __Recipe__ on __Data__.
 ---
 ## Create a project
 
+Start by creating a project to hold all your data 
+
 ---
 
 ## Add data
-Uploading large data ( > 25 MB): 
+__Uploding data__:
+- Large data ( > 25 MB): 
+	- Currently: ask site admin to add it manually 
+	- Final release: an FTP server
+- Text entries ( 10k charachers ):
+	- Write into a text box instead of uploading a file. 
+	
+__Copying data__:
+- Copy from other projects you have access to
+
+
+
 
 
 ---
