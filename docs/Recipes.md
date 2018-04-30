@@ -89,7 +89,9 @@ A recipe is a pipeline with an added graphical interface ( GUI ).
 ---
 ## How do I use a parameter in the script template?
 ![](./images/cutoff-parameter.png)
+
 If you have a parameter called cutoff as above you can use it in a recipe as `{{ cutoff.value }}`.
+
 The placeholder `{{ cutoff.value }}` will get substituted with the user selection in your script. If your script is in bash you could write:
 
 	echo "You selected a cutoff of: {{ cutoff.value }}"
@@ -136,7 +138,11 @@ The __Results__ are created by applying a __Recipe__ on __Data__.
 ---
 ## Create a project
 
-Start by creating a project to hold all your data of the amo 
+Get full `READ` + `WRITE` + `MANAGE` access to projects you create
+
+<sub>To create a project, click the `Create Project` button found at the bottom of the `Project List` page.</sub>
+
+
 
 ---
 
@@ -157,6 +163,9 @@ __Copying data__:
 
 ---
 ## Create recipe 
+
+
+
 
 ---
 ## Run and view results
