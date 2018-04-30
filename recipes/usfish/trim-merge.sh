@@ -27,7 +27,7 @@ DATA_DIR=$(dirname $(cat $INPUT| head -1 ))
 # Trim forward and reverse primer and then trim by quality.
 echo "Removing primers and trimming by quality."
 
-cat $SAMPLESHEET | parallel -j 4  --header : --colsep '\t' bbduk.sh in1=${DATA_DIR}/{read1} in2=${DATA_DIR}/{read2} \
+cat $SAMPLESHEET | parallel -j 4  --header : --colsep ',' bbduk.sh in1=${DATA_DIR}/{read1} in2=${DATA_DIR}/{read2} \
 out1=trimmed/{sample}_R1.fq.gz out2=trimmed/{sample}_R2.fq.gz literal={fwd_primer},{rev_primer} ktrim=l k=$KMER_LEN \
 hdist=1 qtrim=r trimq=$QUALITY minlength=$MIN_LEN overwrite=true 2>>$RUNLOG
 
@@ -53,8 +53,8 @@ echo -e "Sample\tTotal(read1)\tTrimmed\tMerged\tFiltered" >$TABLE
 
 sed 1d $SAMPLESHEET | while IFS='\t' read -r line
 do
-        sample=$(echo $line| cut -d " " -f 1)
-        R1=$(echo $line| cut -d " " -f 7)
+        sample=$(echo $line| cut -d "," -f 1)
+        R1=$(echo $line| cut -d "," -f 7)
         total=$(bioawk -c fastx '{print $name}' $DATA_DIR/$R1 |wc -l)
         trimmed=$(bioawk -c fastx '{print $name}' trimmed/${sample}_R1.fq.gz |wc -l)
         merged=$(bioawk -c fastx '{print $name}' merged/${sample}_merged.fq.gz |wc -l)
