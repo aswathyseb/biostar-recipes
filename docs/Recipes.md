@@ -42,7 +42,7 @@ In many cases, one lab can not recreate the results of another even if both star
 ## Biostar-Engine: A sharing platform
 
 
-The application : https://www.bioinformatics.recipes/
+The website : https://www.bioinformatics.recipes/
 
 Designed to facilitate __sharing__ and __reproducibility__.
 
@@ -143,6 +143,9 @@ Uploading large data ( > 25 MB):
 ## Run and gather results
 
 ---
+# Live Demo!
+https://www.bioinformatics.recipes/
+
 
 
 
