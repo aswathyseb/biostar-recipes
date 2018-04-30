@@ -120,7 +120,7 @@ Evey analysis on the website is cointained within projects.
 
 Each project has three distinct sections:
 
-- Data: Sequencing runs, data files, etc.
+- Data: Sequencing runs, sample sheets, etc.
 - Recipes: Graphic interface + pipeline
 - Results: Data generated from recipes
 
@@ -140,7 +140,7 @@ Uploading large data ( > 25 MB):
 ## Create recipe 
 
 ---
-## Run and gather results
+## Run and view results
 
 ---
 # Live Demo!
