@@ -136,7 +136,7 @@ The __Results__ are created by applying a __Recipe__ on __Data__.
 ---
 ## Create a project
 
-Start by creating a project to hold all your data 
+Start by creating a project to hold all your data of the amo 
 
 ---
 
@@ -149,7 +149,7 @@ __Uploding data__:
 	- Write into a text box instead of uploading a file. 
 	
 __Copying data__:
-- Copy from other projects you have access to
+- Copy from other projects you have access to.
 
 
 
