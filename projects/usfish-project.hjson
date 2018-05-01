@@ -36,6 +36,10 @@ analyses: [
         template: recipes/classify/classify-alignments.sh
     }
 
+    {
+        json: recipes/usfish/trim-merge.hjson
+        template: recipes/usfish/trim-merge.sh
+    }
     ]
 
 data: [
@@ -53,7 +57,7 @@ data: [
         {
             name: Fish Metabarcode Testdata
             value: export/local/usfish/
-            type: FASTQ
+            type: FASTQ, COLLECTION
             summary: This collections contains fish metabarcode data.
 
         }
