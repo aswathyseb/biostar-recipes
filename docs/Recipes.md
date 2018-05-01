@@ -232,8 +232,6 @@ Click on the `/classified` folder to view classification heat maps. Displayed is
 
 ---
 
-## Biostar-Engine: A sharing platform
-
 Source code : https://github.com/biostars/biostar-engine
 
 The website is designed to run and share recipes, by doing the following:
@@ -243,7 +241,7 @@ The website is designed to run and share recipes, by doing the following:
 - Data storage
 
 ---
-## Biostar-Engine: The Software 
+## Biostar-Engine: The software 
 
 - Python based
 - Runs on all operating systems that python runs on
