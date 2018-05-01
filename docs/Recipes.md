@@ -258,7 +258,7 @@ The website is designed to run and share recipes, by doing the following:
 
 - access management ( add/remove users from your project)
 - copy results into data
-- FTP server
+- an FTP server
 - and more to come
 
 
