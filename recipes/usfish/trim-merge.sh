@@ -39,7 +39,7 @@ mkdir -p $MDIR
 cat ${SAMPLESHEET} | parallel --header : --colsep , -j 2 bbmerge.sh  ultrastrict=t in1=$TDIR/{read1} in2=$TDIR/{read2} out=$MDIR/{sample}.fq.gz 2>>$RUNLOG
 
 # Remove reads with Ns.
-echo " Filtering reads with Ns."
+echo "Filtering reads with Ns."
 mkdir -p $FDIR
 cat ${SAMPLESHEET} | parallel --header : --colsep , -j 2  bbduk.sh in=$MDIR/{sample}.fq.gz out=$FDIR/{sample}.fq.gz maxns=0 2>>$RUNLOG
 
