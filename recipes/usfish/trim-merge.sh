@@ -40,12 +40,12 @@ cat ${SAMPLESHEET} | parallel --header : --colsep , -j 2 bbmerge.sh  ultrastrict
 
 # Remove reads with Ns.
 echo " Filtering reads with Ns."
-mkdir $FDIR
+mkdir -p $FDIR
 cat ${SAMPLESHEET} | parallel --header : --colsep , -j 2  bbduk.sh in=$MDIR/{sample}.fq.gz out=$FDIR/{sample}.fq.gz maxns=0 2>>$RUNLOG
 
 # Extract reads in a size range.
 echo "Selecting  reads based on size range."
-mkdir $SDIR
+mkdir -p $SDIR
 cat ${SAMPLESHEET} | parallel --header : --colsep , -j 2 reformat.sh in=$FDIR/{sample}.fq.gz out=$SDIR/{sample}.fq.gz
  minlength=$MIN_LEN maxlength=$MAX_LEN 2>>$RUNLOG
 
