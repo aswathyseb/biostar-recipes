@@ -46,8 +46,7 @@ cat ${SAMPLESHEET} | parallel --header : --colsep , -j 2  bbduk.sh in=$MDIR/{sam
 # Extract reads in a size range.
 echo "Selecting  reads based on size range."
 mkdir -p $SDIR
-cat ${SAMPLESHEET} | parallel --header : --colsep , -j 2 reformat.sh in=$FDIR/{sample}.fq.gz out=$SDIR/{sample}.fq.gz
- minlength=$MIN_LEN maxlength=$MAX_LEN 2>>$RUNLOG
+cat ${SAMPLESHEET} | parallel --header : --colsep , -j 2 reformat.sh in=$FDIR/{sample}.fq.gz out=$SDIR/{sample}.fq.gz minlength=$MIN_LEN maxlength=$MAX_LEN 2>>$RUNLOG
 
 #
 # --------------------------
