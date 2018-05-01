@@ -29,7 +29,7 @@ In many cases, one lab can not recreate the results of another even if both star
 
 ## What is a bioinformatics recipe?
 
-__Recipe__: a collection of commands + an graphical user interface.
+__Recipe__: a collection of commands + a graphical user interface.
 
 It may be a bash script, an R script, a series of mothur instructions. Basically any list of commands that can be executed in an environment.
 <hr> 
@@ -47,7 +47,7 @@ A biologist can easily run it!
 Yes. A recipe may be thought of as a web-enabled pipeline execution environment.
 
 ## What is the purpose of a recipe?
-Recipes allow other people to run scripts that a bioinformatican has written. When executed a recipe creates a full record of a data analysis run. 
+Recipes allow other people to run scripts that a bioinformatician has written. When executed a recipe creates a full record of a data analysis run. 
 
 ---
 
@@ -91,7 +91,7 @@ Each project has three distinct sections:
 ![](./images/todo/project_create.png)
 To create a project, click the `Create Project` button found at the bottom of the `Project List` page.
 
-This will open a form that will allow you to personilize your project.
+This will open a form that will allow you to personalize your project.
 
 ---
 ### Create project form
@@ -104,7 +104,7 @@ Fill in the information and click `Create` to make an empty project.
 ## Four ways to add data
 1. Copy paste into a text box
 1. Upload a small file: 25 MB max.
-1. Link entire directories from command line
+1. Link entire directories from the command line
 1. FTP upload ( in development )
 
 
@@ -136,7 +136,7 @@ The most important of these being __`Data Type`__
 Two ways of getting a recipe:
 - Copy one into your project and modify it
 
-- Create a new one from scratch, with the neccessary skills.
+- Create a new one from scratch, with the necessary skills.
 
 ---
 
@@ -187,7 +187,7 @@ Clicking `Run` on the interface page creates a result in a `Queued` state
 ![](./images/todo/job_finished.png)
 If the recipe has finished successfully, it changes into `Completed`
 
-Click on the result to naviage the files produced during analysis.
+Click on the result to navigate the files produced during analysis.
 
 ---
 ## Navigate files
@@ -213,7 +213,7 @@ Click on the result to naviage the files produced during analysis.
 
 ![ center](./images/todo/result_dir.png)
 `classified` : Stores classification results and heatmaps
-`data`: Supplemantary information used to generate plots
+`data`: Supplementary information used to generate plots
 `rarefaction`: Rarefaction curve and files
 `unclassified`: Store unclassified reads 
 
