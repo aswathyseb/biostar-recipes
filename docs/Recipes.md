@@ -65,6 +65,8 @@ __CRUX-Anacapa Toolkit__
 
 - Taxonomic assignments of metabrcode reads using existing tools.
 
+---
+
 ## CRUX-Anacapa Toolkit
 
 __Tools to be installed__
@@ -84,6 +86,8 @@ __Tools to be installed__
 
 12. BIOCLITE Packages (phyloseq, genefilter, impute, Biostrings, dada2 )
 
+---
+
 ## 
 
 And then you may encounter problems like ...
@@ -93,6 +97,8 @@ And then you may encounter problems like ...
 - package ‘otparse’ is not available (for R version )
 - No specific error messages.
 
+---
+
 ## 
 
 However, we could successfully create a CRUX based library for vertebrates.
@@ -100,3 +106,5 @@ However, we could successfully create a CRUX based library for vertebrates.
 
 __Once you get past the hurdles and make it work, it is much easier to incorporate this as a recipe and run the 
 analysis.__
+
+---
