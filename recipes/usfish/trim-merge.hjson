@@ -32,19 +32,18 @@
   min_length: {
     label: Minimum Length
     display: INTEGER
-    value: 35
-    help: Minimum read length after trimming.
-    range: [ 0,100 ]
+    value: 150
+    help: Minimum read length after merging read pairs.
+    range: [ 0,1000 ]
   }
 
-   kmer_length: {
-    label: Adapter kmer-size
+  max_length: {
+    label: Maximum Length
     display: INTEGER
-    value: 15
-    help: Minimum Kmer size to be used while adapter trimming.
-    range: [ 1,30 ]
+    value: 350
+    help: Maximum read length after merging read pairs.
+    range: [ 0,1000 ]
   }
-
 
   settings: {
     name: Trim and merge reads
@@ -55,8 +54,14 @@
 
     # Help
 
-    This recipe removes barcode and primer sequences from a paired end data collection.
-    The primer-free data is then quality trimmed and merged. Reads with Ns after merging are filtered out.
+    This recipe performs data processing of a paired end read collection.
+    Data processing is carried out in the following order.
+
+    1. Trim reads by quality
+    2. Trim reads of forward and reverse primer sequences.
+    3. Merge trimmed read pairs.
+    4. Filter out reads with Ns.
+    5. Size select reads.
 
     # Input
 
@@ -76,7 +81,8 @@
 
     1. Trimmed paired end reads in trimmed directory.
     2. Merged reads after trimming in merged directory.
-    3. Merged reads filtered for Ns in filtered directory.
+    3. Reads filtered for Ns in filtered directory.
+    4. Size selected reads in selected directory.
 
     '''
 
