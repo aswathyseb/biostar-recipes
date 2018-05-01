@@ -54,7 +54,7 @@ Uploading large data ( > 25 MB):
 ---
 ## Run your own version 
 
-
+---
 ## Some life experiences
 
 - Not all pipelines are easy to run as it look on paper.
@@ -66,7 +66,6 @@ __CRUX-Anacapa Toolkit__
 - Taxonomic assignments of metabrcode reads using existing tools.
 
 ---
-
 ## CRUX-Anacapa Toolkit
 
 __Tools to be installed__
@@ -79,6 +78,12 @@ __Tools to be installed__
 6. bowtie2
 7. NCBI taxonomy dmp files.
 8. NCBI nucl_gb.accession2taxid
+
+---
+## CRUX-Anacapa Toolkit
+
+__Tools to be installed__
+
 9. biopython
 10. R-3.4.2
 11. R-packages (ggplot2 , plyr, dplyr, seqRFLP, reshape2, tibble, devtools, Matrix,
@@ -87,7 +92,6 @@ __Tools to be installed__
 12. BIOCLITE Packages (phyloseq, genefilter, impute, Biostrings, dada2 )
 
 ---
-
 ## 
 
 And then you may encounter problems like ...
