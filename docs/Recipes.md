@@ -1,4 +1,4 @@
-## Collabrative Ananlysis in Bioinformatics 
+## Collaborative Analysis in Bioinformatics 
 ![](./images/collab.jpg ) 
 Natay Aberra 
 Aswathy Sebastian 
@@ -20,9 +20,9 @@ Istavan Albert
 
 Classify population of fish using different analytic pipelines and compare their results.
 
-We wrote our pipelines with around the idea that they sound be tuneable and reproducible. 
+We wrote our pipelines with around the idea that they sound be tunable and reproducible. 
 
-Idealy a pipeline written to classify fish should be able to classify anything else. 
+Ideally, a pipeline written to classify fish should be able to classify anything else. 
 
 
 ---
@@ -34,7 +34,7 @@ In many cases, one lab can not recreate the results of another even if both star
 
 - __Problem__ : Bioinformatics is experiencing a _reproducibility crisis_. 
 - __Solution__ :  A web application allowing scientists to document, execute and share data analysis scripts. 
-	- We call these analysis scripts ___recipes___. 
+    - We call these analysis scripts ___recipes___. 
   
 ---
 ## Biostar-Engine: A sharing platform
@@ -44,7 +44,7 @@ Source code : https://github.com/biostars/biostar-engine
 The website is designed to run and share recipes, by doing the following:
 
 - Generates an easy-to-use graphical interface to command line tools
-- Supports public and private project-based workflows
+- Supports public and private project-based work-flows
 - Data storage
 
 ---
@@ -56,29 +56,29 @@ It may be a bash script, an R script, a series of mothur instructions. Basically
 
 ---
 ___Is a recipe a "pipeline"?___
-<sub>Yes. A recipe may be thought of as a web enabled pipeline execution environment.</sub>
+<sub>Yes. A recipe may be thought of as a web-enabled pipeline execution environment.</sub>
 
 ___What is the purpose of a recipe?___
 <sub>Recipes allow other people to run scripts that you have written. When executed a recipe creates a full record of a data analysis run. </sub>
 
-___How can you get someones recipe?___
-<sub>Just copy it ! Anyone that can see a recipe can copy their own version of it. </sub>
+___How can you get someone's recipe?___
+<sub>Just copy it! Anyone that can see a recipe can copy their own version of it. </sub>
 
 ---
 
 ## Where to start
 
 1. Create a project
-	- <sub>Projects act as containers for recipes, data, and analytic results.</sub>
-	
-2. Add data into project
-	- <sub>Several methods to add data, some have restirctions on size.</sub>
+    - <sub>Projects act as containers for recipes, data, and analytic results.</sub>
+    
+2. Add data to a project
+    - <sub>Several methods to add data, some have restrictions on size.</sub>
 
 3. Create a recipe 
-	- <sub>Create a blank recipe or copy one and edit it.</sub>
+    - <sub>Create a blank recipe or copy one and edit it.</sub>
 
 4. Run the recipe and view results
-	- <sub>Running a recipe creates a set of files that can be downloaded or re-ran in another recipe.</sub>
+    - <sub>Running a recipe creates a set of files that can be downloaded or re-ran in another recipe.</sub>
 
 ---
 ## General structure 
@@ -120,7 +120,7 @@ This opens a form with a `Create` button at the bottom. Click `Create` to get fu
 
 ---
 ## Adding data
-Once your project has succusfully been created, you will be redirected to this page.
+Once your project has successfully been created, you will be redirected to this page.
 ![](./images/todo/empty.png)
 Press the `Data` tab and click `Add Data` link found on that page. 
 ![](./images/todo/add_data.png)
@@ -144,7 +144,7 @@ The most important of these being __`Data Type`__
 
 __Data Type:__
 
-This is used to sub-select for data in recipe dropdowns.
+This is used to sub-select for data in recipe drop-downs.
 
 
 
@@ -240,7 +240,7 @@ A recipe is a pipeline with an added graphical interface ( GUI ).
                 }
         }
    
- 	![](./images/cutoff-parameter.png)
+     ![](./images/cutoff-parameter.png)
 
 
 ---
@@ -251,4 +251,4 @@ If you have a parameter called cutoff as above you can use it in a recipe as `{{
 
 The placeholder `{{ cutoff.value }}` will get substituted with the user selection in your script. If your script is in bash you could write:
 
-	echo "You selected a cutoff of: {{ cutoff.value }}"
+    echo "You selected a cutoff of: {{ cutoff.value }}"
