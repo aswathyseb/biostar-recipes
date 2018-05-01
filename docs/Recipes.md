@@ -212,7 +212,7 @@ Click on the result to navigate the files produced during analysis.
 `/results`
 
 ![ center](./images/todo/result_dir.png)
-`classified` : Stores classification results and heatmaps
+`classified` : Stores classification results and heat maps
 `data`: Supplementary information used to generate plots
 `rarefaction`: Rarefaction curve and files
 `unclassified`: Store unclassified reads 
