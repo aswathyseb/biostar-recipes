@@ -1,5 +1,5 @@
 ## Collaborative Analysis in Bioinformatics 
-![](./images/collab.jpg ) 
+![center](./images/collab.jpg ) 
 Natay Aberra 
 Aswathy Sebastian 
 Istavan Albert 
@@ -8,7 +8,7 @@ Istavan Albert
 ---
 
 ## Introduction 
-
+Bioinformatics Consulting Center at Penn State 
 - __Dr. Istvan Albert__ 
 - __Aswathy Sebastian__ 
 - __Natay Aberra__ 
@@ -16,18 +16,7 @@ Istavan Albert
 
 ---
 
-## Metabarcoding project
-
-Classify population of fish using different analytic pipelines and compare their results.
-
-We wrote our pipelines with around the idea that they sound be tunable and reproducible. 
-
-Ideally, a pipeline written to classify fish should be able to classify anything else. 
-
-
----
-
-## Broader issue 
+## The problem 
 
 In many cases, one lab can not recreate the results of another even if both start with the same data set.
 
@@ -37,48 +26,52 @@ In many cases, one lab can not recreate the results of another even if both star
     - We call these analysis scripts ___recipes___. 
   
 ---
-## Biostar-Engine: A sharing platform
 
-Source code : https://github.com/biostars/biostar-engine
-
-The website is designed to run and share recipes, by doing the following:
-
-- Generates an easy-to-use graphical interface to command line tools
-- Supports public and private project-based work-flows
-- Data storage
-
----
 ## What is a bioinformatics recipe?
 
-__Recipe__: a collection of commands + a graphical user interface.
+__Recipe__: a collection of commands + an graphical user interface.
 
 It may be a bash script, an R script, a series of mothur instructions. Basically any list of commands that can be executed in an environment.
+<hr> 
+
+A biologist can easily run it!
+</hr>
 
 ---
-___Is a recipe a "pipeline"?___
-<sub>Yes. A recipe may be thought of as a web-enabled pipeline execution environment.</sub>
+## Recipe interface
+![ 89% center](./images/todo/classify_fish.png )
 
-___What is the purpose of a recipe?___
-<sub>Recipes allow other people to run scripts that you have written. When executed a recipe creates a full record of a data analysis run. </sub>
 
-___How can you get someone's recipe?___
-<sub>Just copy it! Anyone that can see a recipe can copy their own version of it. </sub>
+---
+## Is a recipe a "pipeline"?
+Yes. A recipe may be thought of as a web-enabled pipeline execution environment.
+
+## What is the purpose of a recipe?
+Recipes allow other people to run scripts that a bioinformatican has written. When executed a recipe creates a full record of a data analysis run. 
+
+---
+
+## Questions? 
+
+## Live demo will follow.
+
+## Slides contain further details
 
 ---
 
 ## Where to start
 
-1. Create a project
-    - <sub>Projects act as containers for recipes, data, and analytic results.</sub>
+1. __Create a project__
+    Projects act as containers for recipes, data, and analytic results.
     
-2. Add data to a project
-    - <sub>Several methods to add data, some have restrictions on size.</sub>
+2. __Add data to a project__
+    Several methods to add data, some have restrictions on size.
 
-3. Create a recipe 
-    - <sub>Create a blank recipe or copy one and edit it.</sub>
+3. __Find a recipe__
+  Find a recipe and copy it into your project to edit.
 
-4. Run the recipe and view results
-    - <sub>Running a recipe creates a set of files that can be downloaded or re-ran in another recipe.</sub>
+4. __Run the recipe and view results__
+   Running a recipe creates a set of files that can be downloaded or re-ran in another recipe.
 
 ---
 ## General structure 
@@ -91,31 +84,28 @@ Each project has three distinct sections:
 - __Results__: files generated from running recipes
 
 ---
-# Access levels
 
-There are three access types a user can have to a project:
-- `READ` : only see content
-- `READ` + `WRITE` : see, edit, add data, create and run recipes.
-- `READ` + `WRITE` + `MANAGE` : add/remove users from project.
+## Create a project
 
-In the same sense, a project has two states: 
-
-- `PUBLIC` : everyone has `READ` access to the project.
-
-- `PRIVATE`: the owner and users added by the project manager have `READ` access.
-
-
-
----
-### Create a project
-
-To create a project, click the `Create Project` button found at the bottom of the `Project List` page.
 
 ![](./images/todo/project_create.png)
+To create a project, click the `Create Project` button found at the bottom of the `Project List` page.
 
-This opens a form with a `Create` button at the bottom. Click `Create` to get full `READ` + `WRITE` + `MANAGE` access to the project and begin adding data.
+This will open a form that will allow you to personilize your project.
 
-<img src="./images/todo/project_create-form.png" style="width:750px;height:350px;"/>
+---
+### Create project form
+
+![89% center ](./images/todo/project_form.png)
+
+Fill in the information and click `Create` to make an empty project.
+
+---
+## Four ways to add data
+1. Copy paste into a text box
+1. Upload a small file: 25 MB max.
+1. Link entire directories from command line
+1. FTP upload ( in development )
 
 
 ---
@@ -127,42 +117,32 @@ Press the `Data` tab and click `Add Data` link found on that page.
 
 
 ---
-
+## Adding data form
 
 You will be able to upload a file ( < 25 MB ) __or__ write data into a text box.
-<img src="./images/todo/add_data-form.png" style="width:800px"/>
+![center](./images/todo/add_data-form.png)
+
 
 ---
-### Attached information
+### Additional information
 
 Data will have extra "attached" information, which can be specified when adding and changed at any time.
-![](./images/todo/extra_info.png)
+![center](./images/todo/extra_info.png)
 The most important of these being __`Data Type`__
 
 ---
+## Find a recipe
 
+Two ways of getting a recipe:
+- Copy one into your project and modify it
 
-__Data Type:__
-
-This is used to sub-select for data in recipe drop-downs.
-
-
-
-__Large data ( > 25 MB):__ 
-
-We currently add it manually from the command line. An FTP server will be used in the final version of the website.
-
-
-__Copying from other places__:
-
-Copy files from results or other projects you have access to.
-More efficient since data already exists
-
+- Create a new one from scratch, with the neccessary skills.
 
 ---
-## Create a recipe 
 
-The simplest way to create a recipe is to copy an existing recipe from another project. 
+## Get a recipe 
+
+The simplest way to get a recipe is to copy an existing recipe from another project. 
 
 Visit a project that has recipes, select the `Recipes` tab, select the recipe of interest, then press the `Copy Recipe` button.
 
@@ -170,85 +150,116 @@ Visit a project that has recipes, select the `Recipes` tab, select the recipe of
 
 
 ---
+### Paste a recipe
+
+![65% center](./images/todo/recipe-paste.png)
 
 Navigate to a project that you have created then in the `Recipes` tab select the `Paste Recipe` button that is now visible to you.
-<img src="./images/todo/recipe-paste.png" style="width:850px;height:310px;"/>
-<img src="./images/todo/pasted_recipe.png" style="width:850px;height:310px;"/>
+![65% center](./images/todo/pasted_recipe.png)
+
 
 ---
-### Run a recipe
+## Run a recipe
 
 
-To run a recipe, select the desired recipe and press the `Run Recipe` button.
+
 ![](./images/todo/recipe_run.png)
-This creates an interface page with a `Run` button at the bottom
-
-<img src="./images/todo/recipe_interface.png" style="width:700px;height:350px;" />
-
+To run a recipe, select the desired recipe and press the `Run Recipe` button.
 
 ---
+## Execute the recipe 
 
+
+
+![ 89% center](./images/todo/classify_fish.png )
+
+Press the `Run` button to execute.
+
+---
+## Recipe queued state
+
+![](./images/todo/job_start.png)
 Clicking `Run` on the interface page creates a result in a `Queued` state
-![](./images/todo/job_queued.png)
+
+---
+## Recipe finished state
+
+![](./images/todo/job_finished.png)
 If the recipe has finished successfully, it changes into `Completed`
-![](./images/todo/job_done.png)
+
+Click on the result to naviage the files produced during analysis.
 
 ---
-### Gathering result files
-Results produce files inside of the working directory. 
-`recipe.sh` holds the live script that can be downloaded an ran on any system.
-<img src="./images/todo/job_file.png" style="width:800px;height:390px;" />
+## Navigate files
 
-Files or directories can be copied into a project you have `WRITE` access to.
+![](./images/todo/homedir.png)
 
+`recipe.sh` holds the live script that can be downloaded and ran on any system.
 
-
----
-## Copying files
-Click the `Copy selected files` at the bottom of the files listing.
-![](./images/todo/copy_job.png)
-Navigate to a project you have `WRITE` access to, then in the data tab click the `Paste` button now visible.
-
-![](./images/todo/paste_files.png)
-
----
-
-# Live Demo!
-https://www.bioinformatics.recipes/
 
 
 ---
+## What are the output files?
+`/index`
+![65% center](./images/todo/index.png)
 
-# Extra Information on building recipes
+
+`/runlog`
+![65% center](./images/todo/runlog.png)
 
 ---
+## Results files
+`/results`
 
-#### Bioinformatic Recipes 
-
-A recipe is a pipeline with an added graphical interface ( GUI ).
-1. The commands may be any list of commands that can be executed in an environment. `echo "Hello World!"`
-  
-2. The GUI spec is a file in JSON (Javascript Object Notation).
-
-      
-        {
-            cutoff: {
-                label: P-Value Cutoff
-                display: FLOAT
-                value: 0.05
-                range: [ 0, 1]
-                }
-        }
-   
-     ![](./images/cutoff-parameter.png)
+![ center](./images/todo/result_dir.png)
+`classified` : Stores classification results and heatmaps
+`data`: Supplemantary information used to generate plots
+`rarefaction`: Rarefaction curve and files
+`unclassified`: Store unclassified reads 
 
 
 ---
-## How do I use a parameter in the script template?
-![](./images/cutoff-parameter.png)
+## Rarefaction curve
 
-If you have a parameter called cutoff as above you can use it in a recipe as `{{ cutoff.value }}`.
+![75% center](./images/todo/rarefaction.png)
+Navigate to the `/rarefaction` folder to view `rarefaction.png`, the rarefaction curve.
 
-The placeholder `{{ cutoff.value }}` will get substituted with the user selection in your script. If your script is in bash you could write:
+---
+## Heat maps
+![center](./images/todo/species_heatmap.png)
 
-    echo "You selected a cutoff of: {{ cutoff.value }}"
+Click on the `/classified` folder to view classification heat maps. Displayed is a sample species heat map.
+
+---
+
+## Biostar-Engine: A sharing platform
+
+Source code : https://github.com/biostars/biostar-engine
+
+The website is designed to run and share recipes, by doing the following:
+
+- Generates an easy-to-use graphical interface to command line tools
+- Supports public and private project-based work-flows
+- Data storage
+
+---
+## Biostar-Engine: The Software 
+
+- Python based
+- Runs on all operating systems that python runs on
+- Open source software
+- Documentation on recipe creation 
+- Repository for good recipes
+- We plan other components: forum, notifications, documentation
+
+---
+
+## Advanced features
+
+- access management ( add/remove users from your project)
+- copy results into data
+- FTP server
+- and more to come
+
+
+---
