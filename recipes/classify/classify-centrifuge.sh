@@ -15,6 +15,9 @@ HITLEN={{hitlen.value}}
 # The list of files in the directory.
 SHEET={{sheet.value}}
 
+# Library type of input reads.
+LIBRARY={{library.value}}
+
 # Output generated while running the tool.
 RUNLOG=runlog/runlog.txt
 
@@ -37,7 +40,8 @@ N=2
 # tar -xvf $TAXDIR/taxdump.tar
 
 # Use the taxonomy specific files to build the custom database.
-TAXDIR=/export/refs/taxonomy
+#TAXDIR=/export/refs/taxonomy
+TAXDIR=/Users/aswathyseb/work/web_dev/biostar-recipes/export/refs/taxonomy
 TABLE=$TAXDIR/table.txt
 NODES=$TAXDIR/nodes.dmp
 NAMES=$TAXDIR/names.dmp
@@ -73,7 +77,14 @@ mkdir -p $RAREFACTION
 centrifuge-build -p $N --conversion-table $TABLE --taxonomy-tree $NODES  --name-table $NAMES  $REFERENCE $INDEX >> $RUNLOG
 
 # Perform the classification.
-cat ${SHEET} | parallel --header : --colsep , -j $N  "centrifuge -x  $INDEX -1 $DDIR/{read1} -2 $DDIR/{read2} --min-hitlen $HITLEN -S $COUNTSDIR/{sample}.rep --report-file  $COUNTSDIR/{sample}.tsv 2>> $RUNLOG"
+
+{% if library.value == "SE" %}
+    # Run centrifuge in single-end mode.
+    cat ${SHEET} | parallel --header : --colsep , -j $N  "centrifuge -x  $INDEX -U $DDIR/{read1} --min-hitlen $HITLEN -S $COUNTSDIR/{sample}.rep --report-file  $COUNTSDIR/{sample}.tsv 2>> $RUNLOG"
+{% else %}
+    # Run centrifuge un paired-end mode.
+    cat ${SHEET} | parallel --header : --colsep , -j $N  "centrifuge -x  $INDEX -1 $DDIR/{read1} -2 $DDIR/{read2} --min-hitlen $HITLEN -S $COUNTSDIR/{sample}.rep --report-file  $COUNTSDIR/{sample}.tsv 2>> $RUNLOG"
+{% endif %}
 
 set +e
 # Generate an individual kraken style reports for each sample
