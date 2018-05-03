@@ -1,14 +1,17 @@
-## Collaborative Analysis in Bioinformatics 
-![](./images/collab.jpg ) 
+##### Collaborative Analysis in Bioinformatics 
+
+<!-- $theme: gaia -->
+
+![80% center](./images/collab.jpg ) 
 Natay Aberra 
 Aswathy Sebastian 
-Istavan Albert 
+Istvan Albert 
 
 
 ---
 
 ## Introduction 
-
+Bioinformatics Consulting Center at Penn State 
 - __Dr. Istvan Albert__ 
 - __Aswathy Sebastian__ 
 - __Natay Aberra__ 
@@ -16,18 +19,7 @@ Istavan Albert
 
 ---
 
-## Metabarcoding project
-
-Classify population of fish using different analytic pipelines and compare their results.
-
-We wrote our pipelines with around the idea that they sound be tunable and reproducible. 
-
-Ideally, a pipeline written to classify fish should be able to classify anything else. 
-
-
----
-
-## Broader issue 
+## The problem 
 
 In many cases, one lab can not recreate the results of another even if both start with the same data set.
 
@@ -37,48 +29,52 @@ In many cases, one lab can not recreate the results of another even if both star
     - We call these analysis scripts ___recipes___. 
   
 ---
-## Biostar-Engine: A sharing platform
 
-Source code : https://github.com/biostars/biostar-engine
-
-The website is designed to run and share recipes, by doing the following:
-
-- Generates an easy-to-use graphical interface to command line tools
-- Supports public and private project-based work-flows
-- Data storage
-
----
 ## What is a bioinformatics recipe?
 
 __Recipe__: a collection of commands + a graphical user interface.
 
 It may be a bash script, an R script, a series of mothur instructions. Basically any list of commands that can be executed in an environment.
+<hr> 
+
+A biologist can easily run it!
+</hr>
 
 ---
-___Is a recipe a "pipeline"?___
-<sub>Yes. A recipe may be thought of as a web-enabled pipeline execution environment.</sub>
+## Recipe interface
+![ 89% center](./images/todo/classify_fish.png )
 
-___What is the purpose of a recipe?___
-<sub>Recipes allow other people to run scripts that you have written. When executed a recipe creates a full record of a data analysis run. </sub>
 
-___How can you get someone's recipe?___
-<sub>Just copy it! Anyone that can see a recipe can copy their own version of it. </sub>
+---
+## Is a recipe a "pipeline"?
+Yes. A recipe may be thought of as a web-enabled pipeline execution environment.
+
+## What is the purpose of a recipe?
+Recipes allow other people to run scripts that a bioinformatician has written. When executed a recipe creates a full record of a data analysis run. 
+
+---
+
+## Questions? 
+
+## Live demo will follow.
+
+## Slides contain further details
 
 ---
 
 ## Where to start
 
-1. Create a project
-    - <sub>Projects act as containers for recipes, data, and analytic results.</sub>
+1. __Create a project__
+    Projects act as containers for recipes, data, and analytic results.
     
-2. Add data to a project
-    - <sub>Several methods to add data, some have restrictions on size.</sub>
+2. __Add data to a project__
+    Several methods to add data, some have restrictions on size.
 
-3. Create a recipe 
-    - <sub>Create a blank recipe or copy one and edit it.</sub>
+3. __Find a recipe__
+  Find a recipe and copy it into your project to edit.
 
-4. Run the recipe and view results
-    - <sub>Running a recipe creates a set of files that can be downloaded or re-ran in another recipe.</sub>
+4. __Run the recipe and view results__
+   Running a recipe creates a set of files that can be downloaded or re-ran in another recipe.
 
 ---
 ## General structure 
@@ -92,31 +88,27 @@ Each project has three distinct sections:
 
 ---
 
-# Access levels
+## Create a project
 
-There are three access types a user can have to a project:
-- `READ` : only see content
-- `READ` + `WRITE` : see, edit, add data, create and run recipes.
-- `READ` + `WRITE` + `MANAGE` : add/remove users from project.
-
-In the same sense, a project has two states: 
-
-- `PUBLIC` : everyone has `READ` access to the project.
-
-- `PRIVATE`: the owner and users added by the project manager have `READ` access.
-
-
-
----
-### Create a project
-
-To create a project, click the `Create Project` button found at the bottom of the `Project List` page.
 
 ![](./images/todo/project_create.png)
+To create a project, click the `Create Project` button found at the bottom of the `Project List` page.
 
-This opens a form with a `Create` button at the bottom. Click `Create` to get full `READ` + `WRITE` + `MANAGE` access to the project and begin adding data.
+This will open a form that will allow you to personalize your project.
 
-<img src="./images/todo/project_create-form.png" style="width:750px;height:350px;"/>
+---
+### Create project form
+
+![89% center ](./images/todo/project_form.png)
+
+Fill in the information and click `Create` to make an empty project.
+
+---
+## Four ways to add data
+1. Copy paste into a text box
+1. Upload a small file: 25 MB max.
+1. Link entire directories from the command line
+1. FTP upload ( in development )
 
 
 ---
@@ -128,25 +120,146 @@ Press the `Data` tab and click `Add Data` link found on that page.
 
 
 ---
-
+## Adding data form
 
 You will be able to upload a file ( < 25 MB ) __or__ write data into a text box.
-<img src="./images/todo/add_data-form.png" style="width:800px"/>
+![center](./images/todo/add_data-form.png)
+
 
 ---
-### Attached information
+### Additional information
 
 Data will have extra "attached" information, which can be specified when adding and changed at any time.
-![](./images/todo/extra_info.png)
+![center](./images/todo/extra_info.png)
 The most important of these being __`Data Type`__
 
 ---
+## Find a recipe
+
+Two ways of getting a recipe:
+- Copy one into your project and modify it
+
+- Create a new one from scratch, with the necessary skills.
+
+---
+
+## Get a recipe 
+
+The simplest way to get a recipe is to copy an existing recipe from another project. 
+
+Visit a project that has recipes, select the `Recipes` tab, select the recipe of interest, then press the `Copy Recipe` button.
+
+![](./images/todo/recipe_copy.png)
 
 
-__Data Type:__
+---
+### Paste a recipe
 
-This is used to sub-select for data in recipe drop-downs.
+![65% center](./images/todo/recipe-paste.png)
+
+Navigate to a project that you have created then in the `Recipes` tab select the `Paste Recipe` button that is now visible to you.
+![65% center](./images/todo/pasted_recipe.png)
+
+
+---
+## Run a recipe
 
 
 
+![](./images/todo/recipe_run.png)
+To run a recipe, select the desired recipe and press the `Run Recipe` button.
 
+---
+## Execute the recipe 
+
+
+
+![ 89% center](./images/todo/classify_fish.png )
+
+Press the `Run` button to execute.
+
+---
+## Recipe queued state
+
+![](./images/todo/job_start.png)
+Clicking `Run` on the interface page creates a result in a `Queued` state
+
+---
+## Recipe finished state
+
+![](./images/todo/job_finished.png)
+If the recipe has finished successfully, it changes into `Completed`
+
+Click on the result to navigate the files produced during analysis.
+
+---
+## Navigate files
+
+![](./images/todo/homedir.png)
+
+`recipe.sh` holds the live script that can be downloaded and ran on any system.
+
+
+
+---
+## What are the output files?
+`/index`
+![65% center](./images/todo/index.png)
+
+
+`/runlog`
+![65% center](./images/todo/runlog.png)
+
+---
+## Results files
+`/results`
+
+![ center](./images/todo/result_dir.png)
+`classified` : Stores classification results and heat maps
+`data`: Supplementary information used to generate plots
+`rarefaction`: Rarefaction curve and files
+`unclassified`: Store unclassified reads 
+
+
+---
+## Rarefaction curve
+
+![75% center](./images/todo/rarefaction.png)
+Navigate to the `/rarefaction` folder to view `rarefaction.png`, the rarefaction curve.
+
+---
+## Heat maps
+![center](./images/todo/species_heatmap.png)
+
+Click on the `/classified` folder to view classification heat maps. Displayed is a sample species heat map.
+
+---
+
+Source code : https://github.com/biostars/biostar-engine
+
+The website is designed to run and share recipes, by doing the following:
+
+- Generates an easy-to-use graphical interface to command line tools
+- Supports public and private project-based work-flows
+- Data storage
+
+---
+## Biostar-Engine: The software 
+
+- Python based
+- Runs on all operating systems that python runs on
+- Open source software
+- Documentation on recipe creation 
+- Repository for good recipes
+- We plan other components: forum, notifications, documentation
+
+---
+
+## Advanced features
+
+- access management ( add/remove users from your project)
+- copy results into data
+- an FTP server
+- and more to come
+
+---
