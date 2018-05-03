@@ -1,8 +1,11 @@
-## Collaborative Analysis in Bioinformatics 
-![center](./images/collab.jpg ) 
+##### Collaborative Analysis in Bioinformatics 
+
+<!-- $theme: gaia -->
+
+![80% center](./images/collab.jpg ) 
 Natay Aberra 
 Aswathy Sebastian 
-Istavan Albert 
+Istvan Albert 
 
 
 ---
