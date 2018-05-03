@@ -29,7 +29,10 @@ analyses: [
         json: recipes/classify/classify-alignments.hjson
         template: recipes/classify/classify-alignments.sh
     }
-
+    {
+        json: recipes/usfish/trim-merge.hjson
+        template: recipes/usfish/trim-merge.sh
+    }
 
     ]
 
