@@ -15,6 +15,9 @@ HITLEN={{hitlen.value}}
 # The list of files in the directory.
 SHEET={{sheet.value}}
 
+# Library type of input reads.
+LIBRARY={{library.value}}
+
 # Output generated while running the tool.
 RUNLOG=runlog/runlog.txt
 
@@ -38,6 +41,7 @@ N=2
 
 # Use the taxonomy specific files to build the custom database.
 TAXDIR=/export/refs/taxonomy
+
 TABLE=$TAXDIR/table.txt
 NODES=$TAXDIR/nodes.dmp
 NAMES=$TAXDIR/names.dmp
@@ -73,7 +77,14 @@ mkdir -p $RAREFACTION
 centrifuge-build -p $N --conversion-table $TABLE --taxonomy-tree $NODES  --name-table $NAMES  $REFERENCE $INDEX >> $RUNLOG
 
 # Perform the classification.
-cat ${SHEET} | parallel --header : --colsep , -j $N  "centrifuge -x  $INDEX -1 $DDIR/{read1} -2 $DDIR/{read2} --min-hitlen $HITLEN -S $COUNTSDIR/{sample}.rep --report-file  $COUNTSDIR/{sample}.tsv 2>> $RUNLOG"
+
+{% if library.value == "SE" %}
+    # Run centrifuge in single-end mode.
+    cat ${SHEET} | parallel --header : --colsep , -j $N  "centrifuge -x  $INDEX -U $DDIR/{read1} --min-hitlen $HITLEN -S $COUNTSDIR/{sample}.rep --report-file  $COUNTSDIR/{sample}.tsv 2>> $RUNLOG"
+{% else %}
+    # Run centrifuge un paired-end mode.
+    cat ${SHEET} | parallel --header : --colsep , -j $N  "centrifuge -x  $INDEX -1 $DDIR/{read1} -2 $DDIR/{read2} --min-hitlen $HITLEN -S $COUNTSDIR/{sample}.rep --report-file  $COUNTSDIR/{sample}.tsv 2>> $RUNLOG"
+{% endif %}
 
 set +e
 # Generate an individual kraken style reports for each sample
@@ -93,5 +104,11 @@ python -m recipes.code.rarefaction $COUNTSDIR/*.rep --outdir $RAREFACTION
 # Extract unclassified reads into separate folder.
 python -m recipes.code.extract_unclassified $DDIR/*.fastq.gz --report_files $COUNTSDIR/*.rep --outdir $UNCLASS
 
+# Please select the correct version
+# This was a merge conflict and needs resolved, merged it like so to make progress
+
 # Tabulate result data by the column "numReads", cutoff not applied here
-python -m recipes.code.combine_centrifuge_reports $COUNTSDIR/*.tsv --column "numUniqueReads" > $CLASSDIR/species_uniquereads_classification.csv
+#python -m recipes.code.combine_centrifuge_reports $COUNTSDIR/*.tsv --column "numUniqueReads" > $CLASSDIR/species_uniquereads_classification.csv
+
+# Tabulate result data by the column "numReads"
+#python -m recipes.code.combine_centrifuge_reports $COUNTSDIR/*.tsv --cutoff 0 --column "numReads" > $CLASSDIR/species_numreads_classification.csv

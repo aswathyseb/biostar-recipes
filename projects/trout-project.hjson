@@ -29,7 +29,10 @@ analyses: [
         json: recipes/classify/classify-alignments.hjson
         template: recipes/classify/classify-alignments.sh
     }
-
+    {
+        json: recipes/usfish/trim-merge.hjson
+        template: recipes/usfish/trim-merge.sh
+    }
 
     ]
 
@@ -43,10 +46,18 @@ data: [
     }
 
     {
-        name: Fish Metabarcode Testdata
-        value: export/local/usfish/
-        type: FASTQ
-        summary: This collections contains sample data from fish sequencing runs.
+        name: Fish Sequences by Common Name
+        value: export/local/usfish/fishname.fa
+        type: FASTA
+        summary: Fish genomic sequences identified by common name.
+    }
+
+    {
+            name: Fish Metabarcode Testdata
+            value: export/local/usfish/
+            type: FASTQ, COLLECTION
+            summary: This collections contains fish metabarcode test data.
+
     }
 
     {

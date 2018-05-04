@@ -36,17 +36,17 @@ cat ${SAMPLESHEET} | parallel --header : --colsep , -j 4 cutadapt --quiet -q $QU
 # Merge trimmed reads.
 echo "Merging  paired end reads."
 mkdir -p $MDIR
-cat ${SAMPLESHEET} | parallel --header : --colsep , -j 2 bbmerge.sh  ultrastrict=t in1=$TDIR/{read1} in2=$TDIR/{read2} out=$MDIR/{sample}.fq.gz 2>>$RUNLOG
+cat ${SAMPLESHEET} | parallel --header : --colsep , -j 2 bbmerge.sh  ultrastrict=t in1=$TDIR/{read1} in2=$TDIR/{read2} out=$MDIR/{sample}.fastq.gz 2>>$RUNLOG
 
 # Remove reads with Ns.
 echo "Filtering reads with Ns."
 mkdir -p $FDIR
-cat ${SAMPLESHEET} | parallel --header : --colsep , -j 2  bbduk.sh in=$MDIR/{sample}.fq.gz out=$FDIR/{sample}.fq.gz maxns=0 2>>$RUNLOG
+cat ${SAMPLESHEET} | parallel --header : --colsep , -j 2  bbduk.sh in=$MDIR/{sample}.fastq.gz out=$FDIR/{sample}.fastq.gz maxns=0 2>>$RUNLOG
 
 # Extract reads in a size range.
 echo "Selecting  reads based on size range."
 mkdir -p $SDIR
-cat ${SAMPLESHEET} | parallel --header : --colsep , -j 2 reformat.sh in=$FDIR/{sample}.fq.gz out=$SDIR/{sample}.fq.gz minlength=$MIN_LEN maxlength=$MAX_LEN 2>>$RUNLOG
+cat ${SAMPLESHEET} | parallel --header : --colsep , -j 2 reformat.sh in=$FDIR/{sample}.fastq.gz out=$SDIR/{sample}.fastq.gz minlength=$MIN_LEN maxlength=$MAX_LEN 2>>$RUNLOG
 
 #
 # --------------------------
@@ -66,9 +66,9 @@ do
         R1=$(echo $line| cut -d "," -f 7)
         total=$(bioawk -c fastx '{print $name}' $DATA_DIR/$R1 |wc -l)
         trimmed=$(bioawk -c fastx '{print $name}' $TDIR/$R1 |wc -l)
-        merged=$(bioawk -c fastx '{print $name}' $MDIR/${sample}.fq.gz |wc -l)
-        filtered=$(bioawk -c fastx '{print $name}' $FDIR/${sample}.fq.gz |wc -l)
-        selected=$(bioawk -c fastx '{print $name}' $SDIR/${sample}.fq.gz | wc -l)
+        merged=$(bioawk -c fastx '{print $name}' $MDIR/${sample}.fastq.gz |wc -l)
+        filtered=$(bioawk -c fastx '{print $name}' $FDIR/${sample}.fastq.gz |wc -l)
+        selected=$(bioawk -c fastx '{print $name}' $SDIR/${sample}.fastq.gz | wc -l)
         echo -e "$sample\t$total\t$trimmed\t$merged\t$filtered\t$selected" >>$TABLE
 done
 

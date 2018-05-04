@@ -19,6 +19,17 @@
     display: DROPDOWN
   }
 
+   library: {
+        value: SE
+        label: Library layout
+        help: Specify the library type.
+        display: DROPDOWN
+        choices: [
+            ["SE", "Single end"],
+            ["PE", "Paired end" ],
+        ]
+  }
+
   reference: {
     value: Fish Sequences by Accession Number
     label: Reference Sequences
