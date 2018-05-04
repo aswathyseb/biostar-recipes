@@ -51,7 +51,7 @@ data: [
             type: FASTQ, COLLECTION
             summary: This collections contains fish metabarcode test data.
 
-        }
+    }
 
     {
         name: Samplesheet for Fish Metabarcode Testdata
