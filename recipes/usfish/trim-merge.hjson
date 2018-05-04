@@ -79,6 +79,8 @@
 
     # Output
 
+    Final results are in `selected` folder. The processed data at each step is organized as follows.
+
     1. Trimmed paired end reads in trimmed directory.
     2. Merged reads after trimming in merged directory.
     3. Reads filtered for Ns in filtered directory.
