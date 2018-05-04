@@ -46,11 +46,12 @@ data: [
     }
 
     {
-        name: Fish Metabarcode Testdata
-        value: export/local/usfish/
-        type: FASTQ
-        summary: This collections contains sample data from fish sequencing runs.
-    }
+            name: Fish Metabarcode Testdata
+            value: export/local/usfish/
+            type: FASTQ, COLLECTION
+            summary: This collections contains fish metabarcode test data.
+
+        }
 
     {
         name: Samplesheet for Fish Metabarcode Testdata

@@ -40,7 +40,6 @@ N=2
 # tar -xvf $TAXDIR/taxdump.tar
 
 # Use the taxonomy specific files to build the custom database.
-#TAXDIR=/export/refs/taxonomy
 TAXDIR=/export/refs/taxonomy
 TABLE=$TAXDIR/table.txt
 NODES=$TAXDIR/nodes.dmp
