@@ -95,4 +95,6 @@ cat ${SHEET} | parallel --header : --colsep , -j $PROC "samtools idxstats $BDIR/
 
 # Create a combined report of all index stats.
 echo "Final results in the 'idxstats.txt file"
-python -m recipes.code.combine_samtools_idxstats --cutoff $CUTOFF results/counts/*idxstats*t | column -t -s , > idxstats.txt
+python -m recipes.code.combine_samtools_idxstats --cutoff $CUTOFF results/counts/*idxstats*t | column -t -s , > counts.txt
+
+python -m recipes.code.combine_samtools_idxstats --cutoff $CUTOFF results/counts/*idxstats*t --by_percent | column -t -s , > percents.txt
