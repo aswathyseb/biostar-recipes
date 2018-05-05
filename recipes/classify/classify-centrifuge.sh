@@ -104,5 +104,6 @@ python -m recipes.code.rarefaction $COUNTSDIR/*.rep --outdir $RAREFACTION
 # Extract unclassified reads into separate folder.
 python -m recipes.code.extract_unclassified $DDIR/*.fastq.gz --report_files $COUNTSDIR/*.rep --outdir $UNCLASS
 
-# Tabulate result data by the column "numReads"
-python -m recipes.code.combine_centrifuge_reports $COUNTSDIR/*.tsv --cutoff 0 --column "numReads" > $CLASSDIR/species_numreads_classification.csv
+
+# Tabulate result data by the column "numUniqueReads", cutoff not applied here
+python -m recipes.code.combine_centrifuge_reports $COUNTSDIR/*.tsv --column "numUniqueReads" > $CLASSDIR/species_uniquereads_classification.csv

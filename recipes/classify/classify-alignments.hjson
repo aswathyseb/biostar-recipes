@@ -86,10 +86,11 @@
       with the first in pair coming first.
 
       # Results
+      1. Combined count report
+      2. Combined percent report and heatmap visualization.
+      3. Aligned bam files in the `results/bam` folder.
+      4. Per-sample alignment statistics `results/counts/` folder.
 
-      1. Aligned bam files in the `results/bam` folder.
-      2. Combined alignment statistics `results/counts/` folder.
-      3. Combined report and heatmap visualization.
       '''
   }
 
