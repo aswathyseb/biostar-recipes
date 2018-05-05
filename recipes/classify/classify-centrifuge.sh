@@ -107,8 +107,5 @@ python -m recipes.code.extract_unclassified $DDIR/*.fastq.gz --report_files $COU
 # Please select the correct version
 # This was a merge conflict and needs resolved, merged it like so to make progress
 
-# Tabulate result data by the column "numReads", cutoff not applied here
-#python -m recipes.code.combine_centrifuge_reports $COUNTSDIR/*.tsv --column "numUniqueReads" > $CLASSDIR/species_uniquereads_classification.csv
-
-# Tabulate result data by the column "numReads"
-#python -m recipes.code.combine_centrifuge_reports $COUNTSDIR/*.tsv --cutoff 0 --column "numReads" > $CLASSDIR/species_numreads_classification.csv
+# Tabulate result data by the column "numUniqueReads", cutoff not applied here
+python -m recipes.code.combine_centrifuge_reports $COUNTSDIR/*.tsv --column "numUniqueReads" > $CLASSDIR/species_uniquereads_classification.csv
