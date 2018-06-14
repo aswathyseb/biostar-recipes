@@ -49,17 +49,29 @@ def print_kreport(df, outdir=None, rank=''):
         subset.to_csv(index=False, path_or_buf=path)
 
 
-def generate_table(allkeys, keyidx, storage, is_kreport=False):
+def generate_ktable(files):
+    "Generate table compatible with k-report"
+
+    storage, allkeys = [], {}
+
+    for fname in files:
+        stream = csv.reader(open(fname, 'rt'), delimiter="\t")
+        # Keep only known rank codes
+        stream = filter(lambda x: x[3] != '-', stream)
+        # Collect all data into a dictionary keyed by keyID
+        data = dict()
+        for row in stream:
+            data[row[4].strip()] = [elem.strip() for elem in row]
+        storage.append(data)
+        # Collect all keys across all data.
+        allkeys.update(data)
 
     table = []
     for key, fields in allkeys.items():
         collect = list(reversed(fields[3:]))
-        collect = collect if is_kreport else fields[0:3]
 
         for data in storage:
-            value = data.get(key, [0] * (keyidx + 1))[keyidx]
-            value = data.get(key, [0])[0] if is_kreport else value
-
+            value = data.get(key, [0])[0]
             value = float(value)
             collect.append(value)
         table.append(collect)
@@ -67,31 +79,41 @@ def generate_table(allkeys, keyidx, storage, is_kreport=False):
     return table
 
 
-def tabulate(files, rankidx=None, keyidx=4, cutoff=1, has_header=True, is_kreport=False):
+def generate_table(files, keyidx, has_header=True):
+
+    name_dict = dict()
+
+    for fname in files:
+        stream = csv.reader(open(fname, 'rt'), delimiter="\t")
+        if has_header:
+            next(stream)
+        for row in stream:
+            key = ','.join(row[0:3])
+            colidx = colnames(files).index(colnames([fname])[0])
+            value = float(row[keyidx])
+            name_dict.setdefault(key, []).append((colidx, value))
+
+    table = []
+    for name, value in name_dict.items():
+        swap = [float(0)] * len(colnames(files))
+        for col, val in value:
+            swap[col] = val
+        table.append(name.split(',') + swap)
+
+    return table
+
+
+
+def tabulate(files, keyidx=4, cutoff=0, has_header=True, is_kreport=False):
     """
     Summarize result found in data_dir by grouping them.
     """
 
-    storage, allkeys = [], {}
-    rank_filter = lambda x: True if rankidx == None else x[rankidx] != '-'
-
-    for fname in files:
-        stream = csv.reader(open(fname, 'rt'), delimiter="\t")
-        # Keep only known rank codes
-        stream = filter(rank_filter, stream)
-        if has_header:
-            next(stream)
-        # Collect all data into a dictionary keyed by keyID
-        data = dict()
-        for row in stream:
-            data[row[keyidx]] = [elem.strip() for elem in row]
-        # Collect all keys across all data.
-        storage.append(data)
-        allkeys.update(data)
-
     # The final table that can be printed and further analyzed
-    table = generate_table(allkeys=allkeys, keyidx=keyidx,
-                           storage=storage, is_kreport=is_kreport)
+    if is_kreport:
+        table = generate_ktable(files=files)
+    else:
+        table = generate_table(files=files, keyidx=keyidx ,has_header=has_header)
 
     # Filter table by cutoffs
     cond1 = lambda row: sum(row[3:]) > cutoff
@@ -123,7 +145,7 @@ def main():
     parser.add_argument('--column', dest='column', type=str,
                         help="Name of column to combine across all files")
 
-    parser.add_argument('--cutoff', dest='cutoff', default=0.1,
+    parser.add_argument('--cutoff', dest='cutoff', default=0.0,
                         help="The sum of rows have to be larger than the cutoff to be registered default=%(default)s.",
                         type=float)
 
@@ -144,10 +166,7 @@ def main():
 
     if args.is_kreport:
         # Special case to handle kraken reports
-        df = tabulate(files=args.files, cutoff=args.cutoff,
-                      rankidx=3, keyidx=4,
-                      has_header=False,
-                      is_kreport=True)
+        df = tabulate(files=args.files, cutoff=args.cutoff, is_kreport=True)
         print_kreport(df, outdir=args.outdir)
     else:
         assert args.column, "--column argument required."

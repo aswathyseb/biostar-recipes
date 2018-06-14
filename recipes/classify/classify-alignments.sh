@@ -94,5 +94,7 @@ cat ${SHEET} | parallel --header : --colsep , -j $PROC "samtools flagstat $BDIR/
 cat ${SHEET} | parallel --header : --colsep , -j $PROC "samtools idxstats $BDIR/{sample}.bam > results/counts/{sample}.idxstats.txt"
 
 # Create a combined report of all index stats.
-echo "Final results in the 'idxstats.txt file"
-python -m recipes.code.combine_samtools_idxstats --cutoff $CUTOFF results/counts/*idxstats*t | column -t -s , > idxstats.txt
+echo "Final results in the 'mapped.txt' and 'mapped_percents.txt' files"
+python -m recipes.code.combine_samtools_idxstats --cutoff $CUTOFF results/counts/*idxstats*t | column -t -s , > mapped.txt
+
+python -m recipes.code.combine_samtools_idxstats --cutoff $CUTOFF results/counts/*idxstats*t --by_percent | column -t -s , > mapped_percents.txt

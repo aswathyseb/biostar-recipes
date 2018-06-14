@@ -26,11 +26,6 @@ def plot(data, args):
     plotter.heatmap(data=data, colidx=2, fname="heatmap.png")
 
 
-# Prints a dataframe
-def print_data(df):
-    print(df.to_csv(index=False, float_format='%.1f'))
-
-
 ACCESSION, SIZE, MAPPED, UNMAPPED, SUM = ['accession', 'size', 'mapped', 'unmapped', 'sum']
 
 
@@ -45,12 +40,10 @@ def tabulate(args):
     for fname in files:
         df = pd.read_table(fname, header=None)
         df.columns = colnames
-        rnum, cnum = df.shape
-        unmapped = df[UNMAPPED].sum()
-        df.loc[rnum-1, MAPPED] = unmapped
-        values = df[MAPPED]
-        percent = values / values.sum() * 100
-        df[MAPPED] = percent
+        if args.by_percent:
+            values = df[MAPPED]
+            df[MAPPED] = values / values.sum() * 100
+
         if res is None:
             res = df[[ACCESSION, SIZE, MAPPED]]
         else:
@@ -75,6 +68,7 @@ def tabulate(args):
 
 
 def main():
+
     from argparse import ArgumentParser
 
     parser = ArgumentParser()
@@ -85,20 +79,20 @@ def main():
     parser.add_argument('--cutoff', dest='cutoff', default=0.1,
                         help="The sum of rows have to be larger than the cutoff to be registered default=%(default)s.",
                         type=float)
-
+    parser.add_argument('--by_percent', dest='by_percent', default=False, action="store_true",
+                        help="Return the percent mapped reads instead of raw mapped reads.")
     parser.add_argument('--show', dest='show', default=False, action="store_true",
-                        help="Show the plot in in a GUI window.",
-                        )
+                        help="Show the plot in in a GUI window.")
 
     if len(sys.argv) == 1:
-        sys.argv.extend([ '--show', 'data/1.idxstats.txt', 'data/2.idxstats.txt'])
+        sys.argv.extend(['data/idxstats-1.txt', 'data/idxstats-2.txt', '--by_percent'])
 
     args = parser.parse_args()
 
     df = tabulate(args)
 
     # Print the data to screen.
-    print_data(df)
+    print(df.to_csv(index=False, float_format='%.1f'))
 
     plot(df, args=args)
 
