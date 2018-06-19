@@ -1,0 +1,87 @@
+{
+  reads:
+
+  {
+    value: Fish Qiime Testdata
+    label: Sequencing Data Directory
+    help: Multiple paired-end sequencing reads.
+    source: PROJECT
+    type: FASTQ
+    display: DROPDOWN
+  }
+
+  sheet: {
+    value: Metadata for Fish Qiime Testdata samples
+    label: Sample metadata
+    help: The sample metadata
+    source: PROJECT
+    type: TSV
+    display: DROPDOWN
+  }
+
+  reference: {
+    value: Fish Reference Sequences by Accession Number
+    label: Reference Sequences
+    help: The sequences to classify against
+    source: PROJECT
+    type: QZA
+    display: DROPDOWN
+  }
+
+  taxonomy: {
+    value: Taxonomy file for fish sequences.
+    label: Taxonomy file
+    help: Taxonomy file for fish sequences
+    source: PROJECT
+    type: QZA
+    display: DROPDOWN
+  }
+
+  library: {
+        value: SE
+        label: Library layout
+        help: Specify the library type.
+        display: DROPDOWN
+        choices: [
+            ["SE", "Single end"],
+            ["PE", "Paired end" ],
+        ]
+  }
+
+  hitlen: {
+        value: 150
+        label: Minimum Length
+        help: The minimum length of the match to accept the classification.
+        display: INTEGER
+        range: [20, 500]
+
+  }
+
+
+
+  settings: {
+    name: Classify sequences using tools in qiime2
+    image: classify-centrifuge.jpg
+    summary: Taxonomic classification of sequence reads using tools in qiime2.
+    help:
+      '''
+
+      # Help
+
+      This recipe will make use of the tools implemented in qiime2 for the taxonomic classification
+      of input sequence reads.
+
+      Sequence quality control and feature table construction will be done using qiime-dada2 plugin.
+      BLAST+ consensus taxonomy classifier is used for the taxonomic classification of de-noised data set.
+
+      ## Input files
+
+      1. Input data directory.
+      2. Sample metadata file in `tsv` format.
+      3. Reference sequences with accessions as a qiime2 artifacts file(.qza)
+      4. Taxonomy file with with accession and taxonomy path as qiime2 artifact file(.qza)
+
+      '''
+  }
+
+}
