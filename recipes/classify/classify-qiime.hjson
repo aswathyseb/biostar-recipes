@@ -37,49 +37,72 @@
     display: DROPDOWN
   }
 
-  library: {
-        value: SE
-        label: Library layout
-        help: Specify the library type.
-        display: DROPDOWN
-        choices: [
-            ["SE", "Single end"],
-            ["PE", "Paired end" ],
-        ]
-  }
-
-  hitlen: {
-        value: 150
-        label: Minimum Length
-        help: The minimum length of the match to accept the classification.
+  trunc_right_f: {
+        value: 200
+        label: 3' end position to truncate in read1
+        help: Position at which forward read sequences to be truncated from at 3' end.
         display: INTEGER
-        range: [20, 500]
+        range: [0, 500]
 
   }
 
+  trunc_right_r: {
+        value: 200
+        label: 3' end position to truncate in read2
+        help: Position at which reverse read sequences to be truncated from at 3' end.
+        display: INTEGER
+        range: [0, 500]
 
+  }
+
+  trunc_left_f: {
+        value: 10
+        label: 5' end position to truncate in read1
+        help: Position until which forward read sequences to be truncated from at 5' end.
+        display: INTEGER
+        range: [0, 500]
+
+  }
+
+  trunc_left_r: {
+        value: 10
+        label: 3' end position to truncate in read2
+        help: Position until which reverse read sequences to be truncated from at 5' end.
+        display: INTEGER
+        range: [0, 500]
+
+  }
+  perc_identity: {
+        value: 0.99
+        label: Minimum percentage identity for BLAST
+        help: Minimum percentage identity for BLAST.
+        display: FLOAT
+        range: [0.0, 1.0]
+
+  }
 
   settings: {
-    name: Classify sequences using tools in qiime2
+    name: Classify paired end sequences using tools in qiime2
     image: classify-centrifuge.jpg
-    summary: Taxonomic classification of sequence reads using tools in qiime2.
+    summary: Taxonomic classification of paired end sequence reads using tools in qiime2.
     help:
       '''
 
       # Help
 
-      This recipe will make use of the tools implemented in qiime2 for the taxonomic classification
-      of input sequence reads.
+      This recipe makes use of the tools implemented in qiime2 for the taxonomic classification
+      of paired end input sequence reads.
 
       Sequence quality control and feature table construction will be done using qiime-dada2 plugin.
+
       BLAST+ consensus taxonomy classifier is used for the taxonomic classification of de-noised data set.
 
       ## Input files
 
-      1. Input data directory.
+      1. Input data directory with paired end reads (File name must look like L2S357_15_L001_R1_001.fastq.gz).
       2. Sample metadata file in `tsv` format.
-      3. Reference sequences with accessions as a qiime2 artifacts file(.qza)
-      4. Taxonomy file with with accession and taxonomy path as qiime2 artifact file(.qza)
+      3. Reference sequences with accessions as a qiime2 artifacts file(.qza).
+      4. Taxonomy file with with accession and taxonomy path as qiime2 artifact file(.qza).
 
       '''
   }

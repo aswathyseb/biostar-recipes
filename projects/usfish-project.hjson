@@ -40,6 +40,12 @@ analyses: [
         json: recipes/usfish/trim-merge.hjson
         template: recipes/usfish/trim-merge.sh
     }
+
+    {
+        json: recipes/classify/classify-qiime.hjson
+        template: recipes/classify/classify-qiime.sh
+    }
+
     ]
 
 data: [
@@ -105,6 +111,36 @@ data: [
             This file is in a format agreed to when developing the recipe. It contains a number of columns
             that describe the samples names, barcodes, primers and file names.
             '''
+
+        }
+
+        {
+            name: Qiime2 classification testdata
+            value: export/local/qiime2/data
+            type: FASTQ, COLLECTION
+            summary: Test dataset for qiime2 tazonomic classification.
+
+        }
+
+        {
+            name: Reference file for qiime2 classification
+            value: export/local/qiime2/12s-ref-06112018.qza
+            type: QZA
+            summary:Reference sequence as Qiime2 artifact file.
+
+        }
+        {
+            name: Taxonomy file for qiime2 classification
+            value: export/local/qiime2/12s-ref-taxonomy-05252018.qza
+            type: QZA
+            summary:Taxonomy file as Qiime2 artifact file.
+
+        }
+        {
+            name: Sample metadata for qiime2 classification testdata
+            value: export/local/qiime2/12s_metadata_file_validated.tsv
+            type: TSV
+            summary:Sample metadata for qiime2 classification testdata
 
         }
 
