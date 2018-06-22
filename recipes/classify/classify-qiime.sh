@@ -3,12 +3,12 @@ set -ue
 export JAVA_LD_LIBRARY_PATH=""
 
 # Include the path to qiime2 environment here.
-source activate /Users/asebastian/miniconda3/envs/qiime2
-#source activate /home/www/miniconda3/envs/qiime2
+#source activate /Users/asebastian/miniconda3/envs/qiime2
+source activate /home/www/miniconda3/envs/qiime2
 
 # This is needed only in Linux machine.
-#export LC_ALL=C.UTF-8
-#export LANG=C.UTF-8
+export LC_ALL=C.UTF-8
+export LANG=C.UTF-8
 
 # The input directory for the data
 DDIR=$(dirname {{reads.value}})
