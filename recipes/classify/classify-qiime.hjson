@@ -57,19 +57,19 @@
 
   }
 
-  trunc_right_r: {
-        value: 120
-        label: 3' end position to truncate in read2
-        help: Position at which reverse read sequences to be truncated from at 3' end.
+  trunc_left_f: {
+        value: 10
+        label: 5' end position to truncate in read1
+        help: Position until which forward read sequences to be truncated from at 5' end.
         display: INTEGER
         range: [0, 500]
 
   }
 
-  trunc_left_f: {
-        value: 10
-        label: 5' end position to truncate in read1
-        help: Position until which forward read sequences to be truncated from at 5' end.
+  trunc_right_r: {
+        value: 120
+        label: 3' end position to truncate in read2
+        help: Position at which reverse read sequences to be truncated from at 3' end.
         display: INTEGER
         range: [0, 500]
 
@@ -95,8 +95,7 @@
   settings: {
     name: Classification of Sequences Using Tools in Qiime2
     image: classify-qiime2.png
-    summary: Taxonomic classification of sequence reads using tools in qiime2.
-    environment: qiime2
+    summary: Taxonomic classification of sequence reads using tools in Qiime2.
     help:
       '''
 
@@ -105,11 +104,20 @@
       This recipe makes use of the tools implemented in qiime2 for the taxonomic classification
       of input sequence reads.
 
-      Sequence quality control and feature table construction will be done using qiime-dada2 plugin.
+      Sequence quality control and feature table construction are done using qiime-dada2 plugin.
 
       BLAST+ consensus taxonomy classifier is used for the taxonomic classification of de-noised data set.
 
-      ## Input files
+      ## Output
+
+      The main result of the recipe is a bar plot showing the taxonomic classification.
+
+      All the result files are in qiime2 artifact/visualization formats. Use [Qiime2 viewer](https://view.qiime2.org/) to view `*.qza` or `*.qzv` files.
+
+
+      ## Input
+
+      The required input files are
 
       1. Input data directory with sequenced reads (File name must look like L2S357_15_L001_R1_001.fastq.gz).
       2. Sample metadata file in `tsv` format.
