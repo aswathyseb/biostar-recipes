@@ -1,5 +1,9 @@
 set -ue
 
+export JAVA_LD_LIBRARY_PATH=""
+
+source activate /Users/asebastian/miniconda3/envs/qiime2
+
 # The input directory for the data
 DDIR=$(dirname {{reads.value}})
 
@@ -13,10 +17,11 @@ TAXONOMY={{taxonomy.value}}
 SHEET={{sheet.value}}
 
 # Library type of input reads.
-#LIBRARY={{library.value}}
+LIBRARY={{library.value}}
 
 # Output generated while running the tool.
 RUNLOG=runlog/runlog.txt
+mkdir -p runlog
 
 # Position at which forward read sequences to be truncated from at 3' end.
 POS_RIGHT_F={{trunc_right_f.value}}
@@ -48,16 +53,36 @@ BLAST=$STORE/blast-taxa
 
 # Import the input files as a qiime2 artifact.
 echo "Importing data as qiime2 artifact."
+
+{% if LIBRARY == "SE" %}
+
+qiime tools import --type 'SampleData[SequencesWithQuality]'  --input-path $DDIR \
+--source-format CasavaOneEightSingleLanePerSampleDirFmt --output-path $STORE/data.qza
+
+{% else %}
+
 qiime tools import --type 'SampleData[PairedEndSequencesWithQuality]'  --input-path $DDIR \
 --source-format CasavaOneEightSingleLanePerSampleDirFmt --output-path $STORE/data.qza
+
+{% endif %}
 
 echo "Generating summary data."
 qiime demux summarize --i-data $STORE/data.qza --o-visualization $STORE/data.qzv
 
 # De-noising with Dada2 and feature table generation.
 echo "De-noising with dada2."
+
+{% if LIBRARY == "SE" %}
+
+qiime dada2 denoise-single --verbose  --i-demultiplexed-seqs $STORE/data.qza --output-dir $DADA2 --p-n-threads $N \
+--p-trunc-len $POS_RIGHT_F --p-trim-left $POS_LEFT_F $POS_LEFT_R
+
+{% else %}
+
 qiime dada2 denoise-paired --verbose  --i-demultiplexed-seqs $STORE/data.qza --output-dir $DADA2 --p-n-threads $N \
 --p-trunc-len-f $POS_RIGHT_F --p-trunc-len-r $POS_RIGHT_R --p-trim-left-f $POS_LEFT_F --p-trim-left-r $POS_LEFT_R
+
+{% endif %}
 
 echo "Making FeatureTable files."
 qiime feature-table summarize --i-table $DADA2/table.qza --o-visualization $DADA2/table.qzv --m-sample-metadata-file $SHEET

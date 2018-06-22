@@ -37,8 +37,19 @@
     display: DROPDOWN
   }
 
+  library: {
+        value: PE
+        label: Library layout
+        help: Specify the library type.
+        display: DROPDOWN
+        choices: [
+            ["SE", "Single end"],
+            ["PE", "Paired end" ],
+        ]
+  }
+
   trunc_right_f: {
-        value: 200
+        value: 120
         label: 3' end position to truncate in read1
         help: Position at which forward read sequences to be truncated from at 3' end.
         display: INTEGER
@@ -47,7 +58,7 @@
   }
 
   trunc_right_r: {
-        value: 200
+        value: 120
         label: 3' end position to truncate in read2
         help: Position at which reverse read sequences to be truncated from at 3' end.
         display: INTEGER
@@ -82,16 +93,17 @@
   }
 
   settings: {
-    name: Classify paired end sequences using tools in qiime2
-    image: classify-centrifuge.jpg
-    summary: Taxonomic classification of paired end sequence reads using tools in qiime2.
+    name: Classification of Sequences Using Tools in Qiime2
+    image: classify-qiime2.png
+    summary: Taxonomic classification of sequence reads using tools in qiime2.
+    environment: qiime2
     help:
       '''
 
       # Help
 
       This recipe makes use of the tools implemented in qiime2 for the taxonomic classification
-      of paired end input sequence reads.
+      of input sequence reads.
 
       Sequence quality control and feature table construction will be done using qiime-dada2 plugin.
 
@@ -99,7 +111,7 @@
 
       ## Input files
 
-      1. Input data directory with paired end reads (File name must look like L2S357_15_L001_R1_001.fastq.gz).
+      1. Input data directory with sequenced reads (File name must look like L2S357_15_L001_R1_001.fastq.gz).
       2. Sample metadata file in `tsv` format.
       3. Reference sequences with accessions as a qiime2 artifacts file(.qza).
       4. Taxonomy file with with accession and taxonomy path as qiime2 artifact file(.qza).
