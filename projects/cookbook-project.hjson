@@ -70,6 +70,10 @@ analyses: [
         json: recipes/quality/quality_check.hjson
         template: recipes/quality/quality_check.sh
     }
+    {
+        json: recipes/classify/classify-qiime.hjson
+        template: recipes/classify/classify-qiime.sh
+    }
 
 ]
 
@@ -162,7 +166,36 @@ data: [
         summary: Transcript sequences from human chromosome 22.
     }
 
-]
+    {
+        name: Qiime2 classification testdata
+        value: export/local/qiime2/data
+        type: FASTQ, COLLECTION
+        summary: Test dataset for qiime2 tazonomic classification.
 
+    }
+
+    {
+        name: Reference file for qiime2 classification
+        value: export/local/qiime2/12s-ref-06112018.qza
+        type: QZA
+        summary:Reference sequence as Qiime2 artifact file.
+
+    }
+    {
+        name: Taxonomy file for qiime2 classification
+        value: export/local/qiime2/12s-ref-taxonomy-05252018.qza
+        type: QZA
+        summary:Taxonomy file as Qiime2 artifact file.
+
+    }
+    {
+        name: Sample metadata for qiime2 classification testdata
+        value: export/local/qiime2/12s_metadata_file_validated.tsv
+        type: TSV
+        summary:Sample metadata for qiime2 classification testdata
+
+    }
+
+]
 
 }
