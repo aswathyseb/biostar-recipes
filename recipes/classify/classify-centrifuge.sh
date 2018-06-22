@@ -42,7 +42,6 @@ N=2
 # Use the taxonomy specific files to build the custom database.
 TAXDIR=/export/refs/taxonomy
 
-
 TABLE=$TAXDIR/table.txt
 NODES=$TAXDIR/nodes.dmp
 NAMES=$TAXDIR/names.dmp
