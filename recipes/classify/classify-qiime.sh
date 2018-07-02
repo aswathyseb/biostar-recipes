@@ -13,6 +13,14 @@ export LANG=C.UTF-8
 # The input directory for the data
 DDIR=$(dirname {{reads.value}})
 
+FILE=$(basename {{reads.value}})
+
+if [[ $FILE == *.zip ]]; then
+echo "unzipping"
+unzip $DDIR/$FILE -d $DDIR/data
+DDIR=$DDIR/data
+fi
+
 # The reference sequence to classify against.
 REFERENCE={{reference.value}}
 
@@ -47,11 +55,11 @@ echo "" > $RUNLOG
 # No. of threads to use.
 N=4
 
-# Create main store for results
+# Create main store for results.
 STORE=results
 mkdir -p $STORE
 
-# Directory that holds input data as qiime2 artifact.
+# Directory that holds input data.
 DATA=$STORE/data
 mkdir -p $DATA
 
