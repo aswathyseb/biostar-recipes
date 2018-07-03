@@ -33,10 +33,6 @@ SHEET={{sheet.value}}
 # Library type of input reads.
 LIBRARY={{library.value}}
 
-# Output generated while running the tool.
-RUNLOG=runlog/runlog.txt
-mkdir -p runlog
-
 # Position at which forward read sequences to be truncated from at 3' end.
 POS_RIGHT_F={{trunc_right_f.value}}
 
@@ -48,9 +44,6 @@ POS_LEFT_F={{trunc_left_f.value}}
 
 #Position until which reverse read sequences to be truncated from at 5' end.
 POS_LEFT_R={{trunc_left_r.value}}
-
-# Wipe clean the runlog.
-echo "" > $RUNLOG
 
 # No. of threads to use.
 N=4
@@ -88,17 +81,17 @@ echo "Generating summary data."
 qiime demux summarize --i-data $DATA/data.qza --o-visualization $DATA/data.qzv
 
 # De-noising with Dada2 and feature table generation.
-echo "De-noising with dada2."
+echo "De-noising with dada2. "
 
 {% if library.value == "SE" %}
 
-qiime dada2 denoise-single --verbose  --i-demultiplexed-seqs $DATA/data.qza --output-dir $DADA2 --p-n-threads $N \
---p-trunc-len $POS_RIGHT_F --p-trim-left $POS_LEFT_F
+(time qiime dada2 denoise-single --verbose  --i-demultiplexed-seqs $DATA/data.qza --output-dir $DADA2 --p-n-threads $N \
+--p-trunc-len $POS_RIGHT_F --p-trim-left $POS_LEFT_F ) 2>&1
 
 {% else %}
 
-qiime dada2 denoise-paired --verbose  --i-demultiplexed-seqs $DATA/data.qza --output-dir $DADA2 --p-n-threads $N \
---p-trunc-len-f $POS_RIGHT_F --p-trunc-len-r $POS_RIGHT_R --p-trim-left-f $POS_LEFT_F --p-trim-left-r $POS_LEFT_R
+(time qiime dada2 denoise-paired --verbose  --i-demultiplexed-seqs $DATA/data.qza --output-dir $DADA2 --p-n-threads $N \
+--p-trunc-len-f $POS_RIGHT_F --p-trunc-len-r $POS_RIGHT_R --p-trim-left-f $POS_LEFT_F --p-trim-left-r $POS_LEFT_R ) 2>&1
 
 {% endif %}
 
