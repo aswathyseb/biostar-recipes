@@ -52,7 +52,7 @@ N=4
 STORE=results
 mkdir -p $STORE
 
-# Directory that holds input data.
+# Directory that holds input data as qiime2 artifact.
 DATA=$STORE/data
 mkdir -p $DATA
 
