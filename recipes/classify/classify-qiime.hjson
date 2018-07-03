@@ -1,12 +1,11 @@
 {
   reads:
-
   {
     value: Fish Qiime Testdata
-    label: Sequencing Data Directory
+    label: Sequencing Data Directory or a Zip File
     help: Multiple paired-end sequencing reads.
     source: PROJECT
-    type: FASTQ
+    type:FASTQ|ZIP
     display: DROPDOWN
   }
 
