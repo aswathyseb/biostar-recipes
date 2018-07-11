@@ -26,6 +26,8 @@ echo "" > $RUNLOG
 
 # How many parallel processes to allow.
 N=2
+# Use the taxonomy specific files to build the custom database.
+TAXDIR=/export/refs/taxonomy
 
 # Download taxonomy specific files. Run these in  $TAXDIR.
 # This operation only needs to be done once for the entire website.
@@ -38,9 +40,6 @@ N=2
 # cat $TAXDIR/nucl_gb.accession2taxid | cut -f 1,3 > $TAXDIR/table.txt
 # Untar file
 # tar -xvf $TAXDIR/taxdump.tar
-
-# Use the taxonomy specific files to build the custom database.
-TAXDIR=/export/refs/taxonomy
 
 TABLE=$TAXDIR/table.txt
 NODES=$TAXDIR/nodes.dmp
