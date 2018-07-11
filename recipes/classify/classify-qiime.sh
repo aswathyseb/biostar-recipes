@@ -1,6 +1,11 @@
 set -ue
 
+export CONDA_PS1_BACKUP=""
 export JAVA_LD_LIBRARY_PATH=""
+export CONDA_PATH_BACKUP=/home/www/miniconda3/bin
+export CONDA_PREFIX=/home/www/miniconda3/envs/engine
+export JAVA_HOME_CONDA_BACKUP=""
+
 
 # Include the path to qiime2 environment here.
 #source activate /Users/asebastian/miniconda3/envs/qiime2

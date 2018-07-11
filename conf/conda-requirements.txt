@@ -2,9 +2,6 @@ fastqc
 multiqc
 bbmap
 centrifuge
-cutadapt
-seqkit
-augustus
 blast
 bwa
 samtools
