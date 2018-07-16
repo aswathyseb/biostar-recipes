@@ -1,7 +1,7 @@
 {
   reads:
   {
-    value: Fish Qiime Testdata
+    value: Qiime2 testdata
     label: Sequencing Data Directory or a Zip File
     help: Multiple paired-end sequencing reads.
     source: PROJECT
@@ -10,7 +10,7 @@
   }
 
   sheet: {
-    value: Metadata for Fish Qiime Testdata samples
+    value: Test metadata sheet for Qiime2
     label: Sample metadata
     help: The sample metadata
     source: PROJECT
@@ -19,8 +19,8 @@
   }
 
   reference: {
-    value: Fish Reference Sequences by Accession Number
-    label: Reference Sequences
+    value: Reference file for qiime2 classification
+    label: Reference Sequences to classify against
     help: The sequences to classify against
     source: PROJECT
     type: QZA
@@ -28,9 +28,9 @@
   }
 
   taxonomy: {
-    value: Taxonomy file for fish sequences.
+    value: Taxonomy file for qiime2 classification
     label: Taxonomy file
-    help: Taxonomy file for fish sequences
+    help: Taxonomy file as Qiime2 artifact file.
     source: PROJECT
     type: QZA
     display: DROPDOWN
