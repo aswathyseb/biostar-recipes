@@ -1,7 +1,7 @@
 {
   reads:
   {
-    value: Fish Qiime Testdata
+    value: Qiime2 testdata
     label: Sequencing Data Directory or a Zip File
     help: Multiple paired-end sequencing reads.
     source: PROJECT
@@ -10,7 +10,7 @@
   }
 
   sheet: {
-    value: Metadata for Fish Qiime Testdata samples
+    value: Test metadata sheet for Qiime2
     label: Sample metadata
     help: The sample metadata
     source: PROJECT
@@ -19,8 +19,8 @@
   }
 
   reference: {
-    value: Fish Reference Sequences by Accession Number
-    label: Reference Sequences
+    value: Reference file for qiime2 classification
+    label: Reference Sequences to classify against
     help: The sequences to classify against
     source: PROJECT
     type: QZA
@@ -28,9 +28,9 @@
   }
 
   taxonomy: {
-    value: Taxonomy file for fish sequences.
+    value: Taxonomy file for qiime2 classification
     label: Taxonomy file
-    help: Taxonomy file for fish sequences
+    help: Taxonomy file as Qiime2 artifact file.
     source: PROJECT
     type: QZA
     display: DROPDOWN
@@ -50,7 +50,7 @@
   trunc_right_f: {
         value: 120
         label: 3' end position to truncate in read1
-        help: Position at which forward read sequences to be truncated from at 3' end.
+        help: Position at which forward reads to be truncated from at 3' end.
         display: INTEGER
         range: [0, 500]
 
@@ -58,8 +58,8 @@
 
   trunc_left_f: {
         value: 10
-        label: 5' end position to truncate in read1
-        help: Position until which forward read sequences to be truncated from at 5' end.
+        label: No. of bases to be trimmed off from 5'end in read1
+        help: No. of bases to be trimmed off from 5'end in read1.
         display: INTEGER
         range: [0, 500]
 
@@ -68,7 +68,7 @@
   trunc_right_r: {
         value: 120
         label: 3' end position to truncate in read2
-        help: Position at which reverse read sequences to be truncated from at 3' end.
+        help: Position at which reverse reads to be truncated from at 3' end.
         display: INTEGER
         range: [0, 500]
 
@@ -76,8 +76,8 @@
 
   trunc_left_r: {
         value: 10
-        label: 3' end position to truncate in read2
-        help: Position until which reverse read sequences to be truncated from at 5' end.
+        label: No. of bases to be trimmed off from 5'end in read2
+        help: No. of bases to be trimmed off from 5'end in read2.
         display: INTEGER
         range: [0, 500]
 
