@@ -23,16 +23,7 @@
     label: Reference Sequences to classify against
     help: The sequences to classify against
     source: PROJECT
-    type: QZA
-    display: DROPDOWN
-  }
-
-  taxonomy: {
-    value: Taxonomy file for qiime2 classification
-    label: Taxonomy file
-    help: Taxonomy file as Qiime2 artifact file.
-    source: PROJECT
-    type: QZA
+    type: FASTA
     display: DROPDOWN
   }
 
