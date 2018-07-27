@@ -43,27 +43,31 @@ DADA2=$STORE/dada2
 # Directory that holds BLAST+ taxonomy classification results.
 BLAST=$STORE/blast-taxa
 
-
 # The reference sequence to classify against.
 REF_FASTA={{reference.value}}
-echo "Converting reference to qiime2 format"
-REFERENCE=$DATA/refs.qza
-# qiime tools import --input-path $REF_FASTA --output-path $REFERENCE --type 'FeatureData[Sequence]'
+
 
 # TAXDIR=/export/refs/taxonomy
-# TAXDIR=/Users/asebastian/work/web-dev/biostar-recipes/export/refs/taxonomy
 # Download taxonomy specific files. Run these in  $TAXDIR.
 # This operation only needs to be done once for the entire website.
+#
 # (cd $TAXDIR && wget ftp://ftp.ncbi.nlm.nih.gov/pub/taxonomy/taxdump.tar.gz)
 # (cd $TAXDIR && wget ftp://ftp.ncbi.nih.gov/pub/taxonomy/accession2taxid/nucl_gb.accession2taxid.gz)
 # (cd $TAXDIR && gunzip taxdump.tar.gz)
 # (cd $TAXDIR && gunzip nucl_gb.accession2taxid.gz)
 # Create the conversion table (accession to taxid mapping).
-# cat $TAXDIR/nucl_gb.accession2taxid | cut -f 2 > $TAXDIR/accessions.txt
+# cat $TAXDIR/nucl_gb.accession2taxid | cut -f 1,3 > $TAXDIR/table.txt
 # Untar file
 # tar -xvf $TAXDIR/taxdump.tar
 
 # Build custom taxonomy lineage. Run this in $TAXDIR.
+# mkdir ~/.taxonkit
+# ln -s $TAXDIR/nodes.dmp ~/.taxonkit/.
+# ln -s $TAXDIR/names.dmp ~/.taxonkit/.
+# ~80 min
+# cat table.txt | cut -f 2| taxonkit lineage  -d ??? | taxonkit reformat -d ??? |cut -f 1,3 >lineage.txt
+# join -t $'\t' -1 2 -2 1 table.txt lineage.txt | cut -f 2,3 |uniq >tmp.txt
+
 # R script should be present in $TAXDIR.
 # This will create lineage.tsv file.
 # Rscript qiime2_taxa.R nodes.dmp names.dmp accessions.txt
@@ -97,6 +101,8 @@ export LC_ALL=C.UTF-8
 export LANG=C.UTF-8
 
 # Convert reference file to qiime2 artifact.
+echo "Converting reference to qiime2 format"
+REFERENCE=$DATA/refs.qza
 qiime tools import --input-path $REF_FASTA --output-path $REFERENCE --type 'FeatureData[Sequence]'
 
 # Convert taxonomy file to qiime 2 artifact.
