@@ -1,6 +1,6 @@
 """
 
-This program is used to get taxonomy lineage from taxon_db dfatabase given an accession.
+This program is used to get taxonomy lineage for an accession from 'taxon_db' database.
 
 """
 

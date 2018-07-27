@@ -1,6 +1,6 @@
 '''
-This script converts a tsv file created by biom-convert command to a csv file required to make heatmap.
-It will convert data to percentages and produce the final csv file in the correct format.
+This script converts a tsv file created by biom-convert command to a csv file.
+It will also convert count data to percentages and produce the produce a percent-csv file required for heatmap generation.
 '''
 
 import os
