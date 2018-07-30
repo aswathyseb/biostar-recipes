@@ -19,7 +19,7 @@
   }
 
   reference: {
-    value: Reference file for qiime2 classification
+    value: Reference file for qiime2 testdata
     label: Reference Sequences to classify against
     help: The sequences to classify against
     source: PROJECT

@@ -170,7 +170,7 @@ data: [
         name: Qiime2 testdata
         value: export/local/qiime2/data
         type: FASTQ, COLLECTION
-        summary: Test dataset for qiime2 tazonomic classification.
+        summary: Test dataset for qiime2 taxonomic classification.
 
     }
     {
@@ -182,20 +182,12 @@ data: [
     }
 
     {
-        name: Reference file for qiime2 classification
-        value: export/local/qiime2/12s-ref-06112018.qza
-        type: QZA
-        summary:Reference sequence as Qiime2 artifact file.
+        name: Reference file for qiime2 testdata
+        value: export/local/qiime2/12s-ref-06112018.fasta
+        type: FASTA
+        summary:Reference sequence as fasta file.
 
     }
-    {
-        name: Taxonomy file for qiime2 classification
-        value: export/local/qiime2/12s-ref-taxonomy-05252018.qza
-        type: QZA
-        summary:Taxonomy file as Qiime2 artifact file.
-
-    }
-
 
 ]
 

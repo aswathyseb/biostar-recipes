@@ -1,5 +1,21 @@
 set -ue
 
+set_env()
+{
+
+export CONDA_PS1_BACKUP=""
+export JAVA_LD_LIBRARY_PATH=""
+export PS1=""
+export CONDA_PATH_BACKUP=""
+export CONDA_PREFIX=""
+export JAVA_HOME_CONDA_BACKUP=""
+
+# This is needed only in Linux machine.
+export LC_ALL=C.UTF-8
+export LANG=C.UTF-8
+
+}
+
 # The input directory for the data
 DDIR=$(dirname {{reads.value}})
 FILE=$(basename {{reads.value}})
@@ -13,6 +29,9 @@ fi
 
 # Library type of input reads.
 LIBRARY={{library.value}}
+
+# Sample Metadata file.
+SHEET={{sheet.value}}
 
 # Position at which forward read sequences to be truncated from at 3' end.
 POS_RIGHT_F={{trunc_right_f.value}}
@@ -48,35 +67,17 @@ REF_FASTA={{reference.value}}
 
 
 # TAXDIR=/export/refs/taxonomy
-# Download taxonomy specific files. Run these in  $TAXDIR.
+# Download taxonomy specific files and create taxonomy lineage database using the script below.
 # This operation only needs to be done once for the entire website.
+# bash taxon_lineage.sh
 #
-# (cd $TAXDIR && wget ftp://ftp.ncbi.nlm.nih.gov/pub/taxonomy/taxdump.tar.gz)
-# (cd $TAXDIR && wget ftp://ftp.ncbi.nih.gov/pub/taxonomy/accession2taxid/nucl_gb.accession2taxid.gz)
-# (cd $TAXDIR && gunzip taxdump.tar.gz)
-# (cd $TAXDIR && gunzip nucl_gb.accession2taxid.gz)
-# Create the conversion table (accession to taxid mapping).
-# cat $TAXDIR/nucl_gb.accession2taxid | cut -f 1,3 > $TAXDIR/table.txt
-# Untar file
-# tar -xvf $TAXDIR/taxdump.tar
-
-# Build custom taxonomy lineage. Run this in $TAXDIR.
-# mkdir ~/.taxonkit
-# ln -s $TAXDIR/nodes.dmp ~/.taxonkit/.
-# ln -s $TAXDIR/names.dmp ~/.taxonkit/.
-# ~80 min
-# cat table.txt | cut -f 2| taxonkit lineage  -d ??? | taxonkit reformat -d ??? |cut -f 1,3 >lineage.txt
-# join -t $'\t' -1 2 -2 1 table.txt lineage.txt | cut -f 2,3 |uniq >tmp.txt
-
-# R script should be present in $TAXDIR.
-# This will create lineage.tsv file.
+# The commands included in taxon_lineage.sh are
+# cat $TAXDIR/nucl_gb.accession2taxid |  cut -f 2 | grep -v "accession" >$TAXDIR/accessions.txt
+# Run R script in $TAXDIR to create lineage.tsv file
 # Rscript qiime2_taxa.R nodes.dmp names.dmp accessions.txt
-# Make the file tab separated with two columns
 # sed -i 's/;/\t/' lineage.tsv
-# sed -i '/accession.version/d' lineage.tsv
-# Create a database of taxon lineage.
+# Create an sqlite database of taxon lineage for faster processing later on.
 # python taxon_db.py taxon_db lineage.tsv
-#
 
 # Collect accessions from reference fasta.
 cat $REF_FASTA | grep ">" | sed 's/ .*$//g' |sed 's/>//g' >$DATA/accessions.txt
@@ -84,36 +85,25 @@ cat $REF_FASTA | grep ">" | sed 's/ .*$//g' |sed 's/>//g' >$DATA/accessions.txt
 # Create taxonomy file.
 python -m recipes.code.get_taxa_lineage --accessions $DATA/accessions.txt --outfile $DATA/taxonomy.tsv
 
-# Change to qiime2 environment
-export CONDA_PS1_BACKUP=""
-export JAVA_LD_LIBRARY_PATH=""
-export CONDA_PATH_BACKUP=/home/www/miniconda3/bin
-export CONDA_PREFIX=/home/www/miniconda3/envs/engine
-export JAVA_HOME_CONDA_BACKUP=""
-
-
-# Include the path to qiime2 environment here.
+# Set the environment variables and switch to qiime2 environment,
+set_env
 #source activate /Users/asebastian/miniconda3/envs/qiime2
 source activate /home/www/miniconda3/envs/qiime2
-
-# This is needed only in Linux machine.
-export LC_ALL=C.UTF-8
-export LANG=C.UTF-8
 
 # Convert reference file to qiime2 artifact.
 echo "Converting reference to qiime2 format"
 REFERENCE=$DATA/refs.qza
 qiime tools import --input-path $REF_FASTA --output-path $REFERENCE --type 'FeatureData[Sequence]'
 
+
 # Convert taxonomy file to qiime 2 artifact.
 TAXONOMY=$DATA/taxonomy.qza
 qiime tools import --input-path $DATA/taxonomy.tsv --output-path $TAXONOMY --type FeatureData[Taxonomy]
 
-# Sample Metadata file.
-SHEET={{sheet.value}}
 
 # Import the input files as a qiime2 artifact.
 echo "Importing data as qiime2 artifact."
+
 
 {% if library.value == "SE" %}
 
@@ -171,9 +161,10 @@ qiime tools export --output-dir $BLAST $BLAST/taxa_level${id}_table.qza
 biom convert -i $BLAST/feature-table.biom -o $BLAST/taxa_level${id}_table.txt --to-tsv
 done
 
-# Change to engine environment.
-source activate /Users/asebastian/miniconda3/envs/engine
-#source activate /home/www/miniconda3/envs/qiime2
+# Switch to engine environment.
+set_env
+source activate /home/www/miniconda3/envs/engine
+#source activate /Users/asebastian/miniconda3/envs/engine
 
 for id in $(seq 1 7)
 do
@@ -181,9 +172,9 @@ do
 python -m recipes.code.qiime_counts_to_csv --infile $BLAST/taxa_level${id}_table.txt --outdir $BLAST  --taxa-level $id
 
 done
-# Remove intermediate files.
-# rm -f $BLAST/*table*txt $BLAST/*table*qza
 
+# Remove intermediate files.
+rm -f $BLAST/*table*txt $BLAST/*table*qza
 
 # Draw the heat maps for each csv report
 python -m recipes.code.plotter $BLAST/*perc.csv --type heat_map
