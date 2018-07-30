@@ -55,9 +55,8 @@ def run(args):
     perc_df = pd.DataFrame(percents)
     counts_df = pd.DataFrame(counts)
 
-    #fname = "/export/refs/alias/fishalias.txt"
-    #df = utils.alias(df=perc_df, fname=fname, key1='name', key2='sciname', name='name')
-
+    #aliasfile = "/Users/asebastian/work/web-dev/biostar-recipes/export/refs/taxonomy/fishalias.txt"
+    #perc_df = utils.alias(df=perc_df, fname=aliasfile, key1='name', key2='sciname', name='name')
 
     prefix = os.path.splitext(os.path.basename(fname))[0]
     prefix = "_".join(prefix.split("_")[:-1])
