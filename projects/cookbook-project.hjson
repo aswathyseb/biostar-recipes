@@ -182,7 +182,7 @@ data: [
     }
 
     {
-        name: Reference file for qiime2 testdata
+        name: Reference file for Qiime2 testdata
         value: export/local/qiime2/12s-ref-06112018.fasta
         type: FASTA
         summary:Reference sequence as fasta file.
