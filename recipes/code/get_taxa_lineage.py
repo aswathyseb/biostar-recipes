@@ -72,7 +72,7 @@ if __name__ == "__main__":
 
     parser = ArgumentParser()
 
-    parser.add_argument('--taxdir', dest='accessions',
+    parser.add_argument('--taxdir', dest='taxdir',
                         help="Path to the taxonomy directory")
 
     parser.add_argument('--accessions', dest='accessions',
