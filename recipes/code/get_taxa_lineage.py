@@ -74,7 +74,6 @@ if __name__ == "__main__":
 
     parser.add_argument('--taxdir', dest='taxdir',
                         help="Path to the taxonomy directory")
-
     parser.add_argument('--accessions', dest='accessions',
                         help="Text file with accessions")
     parser.add_argument('--outfile', dest='outfile',
