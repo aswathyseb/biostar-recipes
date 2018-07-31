@@ -10,8 +10,8 @@ import sqlite3
 from argparse import ArgumentParser
 
 # Database.
-TAXDIR = "/Users/asebastian/work/web-dev/biostar-recipes/export/refs/taxonomy"
-dbname = os.path.join(TAXDIR, "taxon_db")
+#TAXDIR = "/Users/asebastian/work/web-dev/biostar-recipes/export/refs/taxonomy"
+#dbname = os.path.join(TAXDIR, "taxon_db")
 
 
 def strip(s):
@@ -32,6 +32,9 @@ def get_cursor(dbname):
 def get_taxa(fname):
     fname = args.accessions
     outfile = args.outfile
+    taxdir = args.taxdir
+    dbname = os.path.join(taxdir, "taxon_db")
+
     outfile = open(outfile, "w")
 
     curs = get_cursor(dbname)
@@ -68,6 +71,9 @@ if __name__ == "__main__":
     # print(dbname)
 
     parser = ArgumentParser()
+
+    parser.add_argument('--taxdir', dest='accessions',
+                        help="Path to the taxonomy directory")
 
     parser.add_argument('--accessions', dest='accessions',
                         help="Text file with accessions")

@@ -66,7 +66,7 @@ BLAST=$STORE/blast-taxa
 REF_FASTA={{reference.value}}
 
 
-# TAXDIR=/export/refs/taxonomy
+TAXDIR=/export/refs/taxonomy
 # Download taxonomy specific files and create taxonomy lineage database using the script below.
 # This operation only needs to be done once for the entire website.
 # bash taxon_lineage.sh
@@ -83,7 +83,7 @@ REF_FASTA={{reference.value}}
 cat $REF_FASTA | grep ">" | sed 's/ .*$//g' |sed 's/>//g' >$DATA/accessions.txt
 
 # Create taxonomy file.
-python -m recipes.code.get_taxa_lineage --accessions $DATA/accessions.txt --outfile $DATA/taxonomy.tsv
+python -m recipes.code.get_taxa_lineage --taxdir $TAXDIR --accessions $DATA/accessions.txt --outfile $DATA/taxonomy.tsv
 
 # Set the environment variables and switch to qiime2 environment,
 set_env
