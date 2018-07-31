@@ -67,6 +67,7 @@ REF_FASTA={{reference.value}}
 
 
 TAXDIR=/export/refs/taxonomy
+#TAXDIR=/Users/asebastian/work/web-dev/biostar-recipes/export/refs/taxonomy
 # Download taxonomy specific files and create taxonomy lineage database using the script below.
 # This operation only needs to be done once for the entire website.
 # bash taxon_lineage.sh
