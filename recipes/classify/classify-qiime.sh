@@ -70,7 +70,7 @@ TAXDIR=/export/refs/taxonomy
 #
 # Download taxonomy specific files and create taxonomy lineage database using the script below.
 # This operation only needs to be done only once for the entire website.
-# It will create 'taxon_db' database in $TAXDIR. 
+# It will create 'taxon_db' database in $TAXDIR.
 # python -m recipes.code.taxon_lineage --taxdir $TAXDIR
 #
 DBPATH=$TAXDIR/taxon_db
