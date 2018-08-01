@@ -2,6 +2,7 @@ import sqlite3
 import os, sys
 import csv
 from itertools import *
+from argparse import ArgumentParser
 
 #set tmp directory for sqlite3
 os.environ["SQLITE_TMPDIR"]="/home/aswathy/tmp"
@@ -65,9 +66,20 @@ def create_acc2taxon(dbname, fname):
 
 
 if __name__ == '__main__':
+
+    parser = ArgumentParser()
+
+
+    parser.add_argument('--dbpath', dest='dbpath', required = True,
+                        help="Specify the full path of the database destination.")
+    parser.add_argument('--infile', dest='infile', required = True,
+                        help="Specify the input file required to create the database.")
+
+    args = parser.parse_args()
+    dbpath = args.dbpath
+    infile = args.infile
+
     #dbname = 'taxon_db'
-    dbname = sys.argv[1]
-    inputfile = sys.argv[2]
-    create_db(dbname)
+    create_db(dbpath)
     #print_db(dbname)
-    create_acc2taxon(dbname, inputfile)
+    create_acc2taxon(dbpath, infile)

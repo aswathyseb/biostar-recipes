@@ -67,18 +67,13 @@ REF_FASTA={{reference.value}}
 
 
 TAXDIR=/export/refs/taxonomy
+
 #TAXDIR=/Users/asebastian/work/web-dev/biostar-recipes/export/refs/taxonomy
 # Download taxonomy specific files and create taxonomy lineage database using the script below.
 # This operation only needs to be done once for the entire website.
-# bash taxon_lineage.sh
+# It will create 'taxon_db' database. Copy it to $TAXDIR for the recipe to work.
+# python -m recipes.code.taxon_lineage --taxdir $TAXDIR
 #
-# The commands included in taxon_lineage.sh are
-# cat $TAXDIR/nucl_gb.accession2taxid |  cut -f 2 | grep -v "accession" >$TAXDIR/accessions.txt
-# Run R script in $TAXDIR to create lineage.tsv file
-# Rscript qiime2_taxa.R nodes.dmp names.dmp accessions.txt
-# sed -i 's/;/\t/' lineage.tsv
-# Create an sqlite database of taxon lineage for faster processing later on.
-# python taxon_db.py taxon_db lineage.tsv
 
 # Collect accessions from reference fasta.
 cat $REF_FASTA | grep ">" | sed 's/ .*$//g' |sed 's/>//g' >$DATA/accessions.txt
