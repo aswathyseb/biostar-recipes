@@ -67,12 +67,13 @@ REF_FASTA={{reference.value}}
 
 
 TAXDIR=/export/refs/taxonomy
-DBPATH=$TAXDIR/taxon_db
+#
 # Download taxonomy specific files and create taxonomy lineage database using the script below.
-# This operation only needs to be done once for the entire website.
-# It will create 'taxon_db' database. Copy it to $TAXDIR for the recipe to work.
+# This operation only needs to be done only once for the entire website.
+# It will create 'taxon_db' database in $TAXDIR. 
 # python -m recipes.code.taxon_lineage --taxdir $TAXDIR
 #
+DBPATH=$TAXDIR/taxon_db
 
 # Collect accessions from reference fasta.
 cat $REF_FASTA | grep ">" | sed 's/ .*$//g' |sed 's/>//g' >$DATA/accessions.txt
