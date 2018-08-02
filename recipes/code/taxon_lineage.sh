@@ -23,6 +23,8 @@ Rscript $CURRENT/qiime2_taxa.R $TAXDIR/nodes.dmp $TAXDIR/names.dmp $TAXDIR/acces
 
 # Make the file tab separated with two columns
 sed -i 's/;/\t/' $TAXDIR/lineage.tsv
+# Only for mac.
+# sed -i .bak $'s/;/\t/' $TAXDIR/lineage.tsv
 
 # Create an sqlite database of taxon lineage for faster processing later on.
 python -m recipes.code.taxon_db --dbpath $TAXDIR/taxon_db --infile $TAXDIR/lineage.tsv

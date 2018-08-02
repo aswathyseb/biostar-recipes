@@ -36,3 +36,7 @@ if(dim(accessions)[1] == dim(taxonomy)[1]) {
 write.table(out, file ="lineage.tsv", sep=";", quote=FALSE, row.names = FALSE)
 }
 
+# Modify the header
+content = readLines("lineage.tsv",-1)
+content[1]="Feature ID\tTaxon"
+writeLines(content,"lineage.tsv")
