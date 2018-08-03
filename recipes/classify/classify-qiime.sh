@@ -164,7 +164,7 @@ source activate /home/www/miniconda3/envs/engine
 
 for id in $(seq 1 7)
 do
-# Format table to create heatmaps.
+# Format table to create heatmaps. Creates *counts.csv and *perc.csv files.
 python -m recipes.code.qiime_counts_to_csv --infile $BLAST/taxa_level${id}_table.txt --outdir $BLAST  --taxa-level $id
 
 done
