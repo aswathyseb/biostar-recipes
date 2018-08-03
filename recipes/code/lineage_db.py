@@ -37,12 +37,17 @@ def create_acc2taxon(dbname, fname):
     conn = get_conn(dbname)
     curs = conn.cursor()
 
-    stream = csv.DictReader(open(fname), delimiter='\t')
+    # stream = csv.DictReader(open(fname), delimiter='\t')
+    stream = csv.reader(open(fname), delimiter='\t')
     stream = islice(stream, LIMIT)
     data = []
     for index, row in enumerate(stream):
 
-        data.append((row['Feature ID'], row['Taxon']))
+        # data.append((row['Feature ID'], row['Taxon']))
+        # removing the version info from accession.
+        accession = row[0].split(".")[0]
+        lineage = row[1]
+        data.append((accession, lineage))
 
         remain = index % CHUNK
 

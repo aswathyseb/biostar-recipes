@@ -14,7 +14,7 @@
     label: Sample metadata
     help: The sample metadata
     source: PROJECT
-    type: TSV
+    type: CSV|TSV
     display: DROPDOWN
   }
 

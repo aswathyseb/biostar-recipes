@@ -31,7 +31,7 @@ fi
 LIBRARY={{library.value}}
 
 # Sample Metadata file.
-SHEET={{sheet.value}}
+SAMPLE_SHEET={{sheet.value}}
 
 # Position at which forward read sequences to be truncated from at 3' end.
 POS_RIGHT_F={{trunc_right_f.value}}
@@ -60,7 +60,7 @@ mkdir -p $DATA
 DADA2=$STORE/dada2
 
 # Directory that holds BLAST+ taxonomy classification results.
-BLAST=$STORE/blast-taxa
+BLAST=$STORE/classified
 
 # The reference sequence to classify against.
 REF_FASTA={{reference.value}}
@@ -73,13 +73,17 @@ TAXDIR=/export/refs/taxonomy
 # It will create 'taxon_db' database in $TAXDIR.
 # python -m recipes.code.taxon_lineage --taxdir $TAXDIR
 #
-DBPATH=$TAXDIR/taxon_db
+DBPATH=$TAXDIR/lineage_db
 
 # Collect accessions from reference fasta.
 cat $REF_FASTA | grep ">" | sed 's/ .*$//g' |sed 's/>//g' >$DATA/accessions.txt
 
 # Create taxonomy file.
 python -m recipes.code.get_taxa_lineage --dbpath $DBPATH --accessions $DATA/accessions.txt --outfile $DATA/taxonomy.tsv
+
+# Convert sample sheet to a tsv file with .
+SHEET=$DATA/metadata.tsv
+cat $SAMPLE_SHEET | awk 'BEGIN{OFS="\t"}{ if(NR==1) {$1="sampleid"; print} else {print}}'| tr "," "\t"  >$SHEET
 
 # Set the environment variables and switch to qiime2 environment,
 set_env
