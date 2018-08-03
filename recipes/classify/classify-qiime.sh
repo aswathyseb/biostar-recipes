@@ -83,7 +83,7 @@ python -m recipes.code.get_taxa_lineage --dbpath $DBPATH --accessions $DATA/acce
 
 # Convert sample sheet to a tsv file with .
 SHEET=$DATA/metadata.tsv
-cat $SAMPLE_SHEET | awk 'BEGIN{OFS="\t"}{ if(NR==1) {$1="sampleid"; print} else {print}}'| tr "," "\t"  >$SHEET
+cat $SAMPLE_SHEET | awk 'BEGIN{FS=",";OFS="\t"}{ if(NR==1) {$1="sampleid"; print} else {print}}'| tr "," "\t"  >$SHEET
 
 # Set the environment variables and switch to qiime2 environment,
 set_env

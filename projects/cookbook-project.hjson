@@ -175,8 +175,8 @@ data: [
     }
     {
         name: Test metadata sheet for Qiime2
-        value: export/local/qiime2/12s_metadata_file_validated.tsv
-        type: TSV
+        value: export/local/qiime2/12s_metadata_file_validated.csv
+        type: CSV
         summary:Sample metadata for qiime2 classification testdata
 
     }
