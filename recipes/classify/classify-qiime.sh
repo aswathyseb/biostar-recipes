@@ -87,7 +87,6 @@ cat $SAMPLE_SHEET | awk 'BEGIN{FS=",";OFS="\t"}{ if(NR==1) {$1="sampleid"; print
 
 # Set the environment variables and switch to qiime2 environment,
 set_env
-#source activate /Users/asebastian/miniconda3/envs/qiime2
 source activate /home/www/miniconda3/envs/qiime2
 
 # Convert reference file to qiime2 artifact.
@@ -164,7 +163,6 @@ done
 # Switch to engine environment.
 set_env
 source activate /home/www/miniconda3/envs/engine
-#source activate /Users/asebastian/miniconda3/envs/engine
 
 for id in $(seq 1 7)
 do
