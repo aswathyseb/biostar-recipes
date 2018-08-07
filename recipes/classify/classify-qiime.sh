@@ -9,6 +9,7 @@ export PS1=""
 export CONDA_PATH_BACKUP=""
 export CONDA_PREFIX=""
 export JAVA_HOME_CONDA_BACKUP=""
+export JAVA_HOME=""
 
 # This is needed only in Linux machine.
 export LC_ALL=C.UTF-8
