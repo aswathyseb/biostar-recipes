@@ -72,8 +72,8 @@ analyses: [
         template: recipes/classify/classify-qiime.sh
     }
     {
-        json: recipes/usfish/classify-centrifuge-barcoded.hjson
-        template: recipes/usfish/classify-centrifuge-barcoded.sh
+        json: recipes/usfish/check-pcr-barcodes.hjson
+        template: recipes/usfish/check-pcr-barcodes.sh
     }
 
 ]
