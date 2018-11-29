@@ -2,6 +2,14 @@ set -ue
 
 # The input directory for the data
 DDIR=$(dirname {{reads.value}})
+FILE=$(basename {{reads.value}})
+
+# Unzip if the data is zipped
+if [[ $FILE == *.zip ]]; then
+echo "unzipping"
+unzip $DDIR/$FILE -d $DDIR/data
+DDIR=$DDIR/data
+fi
 
 # The list of files in the directory.
 SHEET={{sheet.value}}
@@ -33,6 +41,14 @@ mkdir -p $CORRECT
 INCORRECT=$STORE/false-barcodes
 mkdir -p $INCORRECT
 
+# Validate sample sheet
+status=$(python -m recipes.code.exists $DDIR $SHEET)
+if [ ! -z "$status" ]; then
+    echo "Error in sample sheet in following files. Exiting"
+    echo $status
+    exit
+fi
+
 {% if library.value == "SE" %}
     # Filter out reads with in correct PCR barcode.
     cat ${SHEET} | parallel --header : --colsep , -j 2 cutadapt -g ^{fwd_barcode} -e $ERROR --no-trim $DDIR/{read1} -o $CORRECT/{read1} --untrimmed-output $INCORRECT/false_barcode_{read1} >>$RUNLOG
@@ -46,9 +62,9 @@ mkdir -p $INCORRECT
 
 # Read stats after PCR barcode check.
 echo "--- Reads with correct PCR-barcode --- "
-seqkit stat $CORRECT/*
 seqkit stat $CORRECT/* >$STORE/true-barcode-stats.txt
+cat $STORE/true-barcode-stats.txt
 
 echo -e "\n--- Reads without correct PCR-barcode --- "
-seqkit stat $INCORRECT/*
 seqkit stat $INCORRECT/* >$STORE/false-barcode-stats.txt
+cat $STORE/false-barcode-stats.txt
