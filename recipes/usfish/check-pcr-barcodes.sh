@@ -42,12 +42,9 @@ INCORRECT=$STORE/false-barcodes
 mkdir -p $INCORRECT
 
 # Validate sample sheet
-status=$(python -m recipes.code.exists $DDIR $SHEET)
-if [ ! -z "$status" ]; then
-    echo "Error in sample sheet in following files. Exiting"
-    echo $status
-    exit
-fi
+url="https://gist.githubusercontent.com/aswathyseb/5d695e86a80cf9b86a0be57eb635bf6e/raw/464d719aa44d64040d6fe323683cb96ae68d8b95/exists.py"
+curl -s $url >exists.py
+python exists.py $DDIR $SHEET
 
 {% if library.value == "SE" %}
     # Filter out reads with in correct PCR barcode.
@@ -60,6 +57,7 @@ fi
 
 {% endif %}
 
+
 # Read stats after PCR barcode check.
 echo "--- Reads with correct PCR-barcode --- "
 seqkit stat $CORRECT/* >$STORE/true-barcode-stats.txt
@@ -68,3 +66,8 @@ cat $STORE/true-barcode-stats.txt
 echo -e "\n--- Reads without correct PCR-barcode --- "
 seqkit stat $INCORRECT/* >$STORE/false-barcode-stats.txt
 cat $STORE/false-barcode-stats.txt
+
+# Zip output files.
+zip -r $CORRECT.zip $CORRECT
+zip -r $INCORRECT.zip $INCORRECT
+
