@@ -7,7 +7,7 @@ FILE=$(basename {{reads.value}})
 # Unzip if the data is zipped
 if [[ $FILE == *.zip ]]; then
 echo "unzipping"
-unzip $DDIR/$FILE -d $DDIR/data
+unzip -q -o $DDIR/$FILE -d $DDIR/data
 DDIR=$DDIR/data
 fi
 
