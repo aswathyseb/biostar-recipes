@@ -16,13 +16,13 @@ def check_sample_sheet(data_dir, fname):
         if not os.path.isfile(file2):
             error_list.append(fname2)
 
-        if error_list:
-            print("Error in the sample sheet in following files. Exiting")
-            for fname in error_list:
-                print(fname)
-            sys.exit(1)
-        else:
-            sys.exit(0)
+    if error_list:
+        print("Error in the sample sheet in following files. Exiting")
+        for fname in error_list:
+            print(fname)
+        sys.exit(1)
+    else:
+        sys.exit(0)
 
 
 if __name__ == "__main__":

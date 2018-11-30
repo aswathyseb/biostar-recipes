@@ -30,44 +30,44 @@ echo "" > $RUNLOG
 N=2
 
 # Create main store for results
-STORE=results
-mkdir -p $STORE
+#STORE=results
+#mkdir -p $STORE
 
 # Directory to store reads with correct PCR barcode.
-CORRECT=$STORE/true-barcodes
+CORRECT=correct-barcodes
 mkdir -p $CORRECT
 
 # Directory to store reads with incorrect PCR barcode.
-INCORRECT=$STORE/false-barcodes
+INCORRECT=incorrect-barcodes
 mkdir -p $INCORRECT
 
 # Validate sample sheet
-url="https://gist.githubusercontent.com/aswathyseb/5d695e86a80cf9b86a0be57eb635bf6e/raw/464d719aa44d64040d6fe323683cb96ae68d8b95/exists.py"
-curl -s $url >exists.py
-python exists.py $DDIR $SHEET
+url="https://gist.githubusercontent.com/aswathyseb/5d695e86a80cf9b86a0be57eb635bf6e/raw/91bcbfbee957d9d38c04f3f947eeed500e94ee90/exists.py"
+curl -s $url >validate.py
+python validate.py $DDIR $SHEET
 
 {% if library.value == "SE" %}
     # Filter out reads with in correct PCR barcode.
-    cat ${SHEET} | parallel --header : --colsep , -j 2 cutadapt -g ^{fwd_barcode} -e $ERROR --no-trim $DDIR/{read1} -o $CORRECT/{read1} --untrimmed-output $INCORRECT/false_barcode_{read1} >>$RUNLOG
+    cat ${SHEET} | parallel --header : --colsep , -j 2 cutadapt -g ^{fwd_barcode} -e $ERROR --no-trim $DDIR/{read1} -o $CORRECT/{read1} --untrimmed-output $INCORRECT/incorrect_barcode_{read1} >>$RUNLOG
 
 {% else %}
     # Filter out reads with in correct PCR barcode.
     cat ${SHEET} | parallel --header : --colsep , -j 2 cutadapt -g ^{fwd_barcode} -G ^{rev_barcode} \
-    -e $ERROR --pair-filter any --no-trim $DDIR/{read1}  $DDIR/{read2}  -o $CORRECT/{read1} -p $CORRECT/{read2} --untrimmed-output $INCORRECT/false_barcode_{read1} --untrimmed-paired-output $INCORRECT/false_barcode_{read2} >>$RUNLOG
+    -e $ERROR --pair-filter any --no-trim $DDIR/{read1}  $DDIR/{read2}  -o $CORRECT/{read1} -p $CORRECT/{read2} --untrimmed-output $INCORRECT/incorrect_barcode_{read1} --untrimmed-paired-output $INCORRECT/incorrect_barcode_{read2} >>$RUNLOG
 
 {% endif %}
 
 
 # Read stats after PCR barcode check.
-echo "--- Reads with correct PCR-barcode --- "
-seqkit stat $CORRECT/* >$STORE/true-barcode-stats.txt
-cat $STORE/true-barcode-stats.txt
+seqkit stat $CORRECT/* >correct-barcode-stats.txt
+seqkit stat $INCORRECT/* >incorrect-barcode-stats.txt
 
-echo -e "\n--- Reads without correct PCR-barcode --- "
-seqkit stat $INCORRECT/* >$STORE/false-barcode-stats.txt
-cat $STORE/false-barcode-stats.txt
 
-# Zip output files.
-zip -r $CORRECT.zip $CORRECT
-zip -r $INCORRECT.zip $INCORRECT
+# zip output files.
+zip -q -r $CORRECT.zip $CORRECT
+zip -q -r $INCORRECT.zip $INCORRECT
+
+# remove *.gz files
+rm -rf $CORRECT $INCORRECT
+
 
