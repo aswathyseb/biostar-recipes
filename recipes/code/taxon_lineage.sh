@@ -13,18 +13,20 @@ CURRENT=$2
 #(cd $TAXDIR && gunzip nucl_gb.accession2taxid.gz)
 
 # Untar file
-#tar -xvf $TAXDIR/taxdump.tar
+#tar -xvf $TAXDIR/taxdump.tar -C $TAXDIR
 
 # Create accession list
-cat $TAXDIR/nucl_gb.accession2taxid |  cut -f 2 | grep -v "accession" >$TAXDIR/accessions.txt
+#cat $TAXDIR/nucl_gb.accession2taxid |  cut -f 2 | grep -v "accession" >$TAXDIR/accessions.txt
 
 # Run R script in $TAXDIR to create lineage.tsv file
 Rscript $CURRENT/qiime2_lineage.R $TAXDIR/nodes.dmp $TAXDIR/names.dmp $TAXDIR/accessions.txt
 
+echo "lineage.tsv created"
 # Make the file tab separated with two columns
 sed -i 's/;/\t/' $TAXDIR/lineage.tsv
 # Only for mac.
 #sed -i .bak $'s/;/\t/' $TAXDIR/lineage.tsv
+
 
 # Create an sqlite database of taxon lineage for faster processing later on.
 python -m recipes.code.lineage_db --dbpath $TAXDIR/lineage_db --infile $TAXDIR/lineage.tsv
